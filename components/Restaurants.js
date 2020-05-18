@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button,ActivityIndicator, Link } from 'react-na
 import { NavigationContainer } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import Dates from './Dates';
+import Cuisines from './Cuisines';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import * as Permissions from 'expo-permissions';
@@ -12,12 +13,13 @@ export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
-  const [restaurant, setRestaurant] = useState('');
+  const [restaurant, setRestaurant] = useState(null);
   const [randomNumber, setRandomNumber] = useState(0);
 const [loading, setLoading] = useState(true);
 const [address,setAddress] = useState('');
 const [typeOfCuisine,setTypeOfCuisine] = useState('')
 const [addressLink,setAddressLink]= useState('')
+const [cuisine, setCuisine]= useState(null)
 
    const location = navigator.geolocation.getCurrentPosition((position) =>  {
       let latitude =  position.coords.latitude
@@ -26,9 +28,7 @@ const [addressLink,setAddressLink]= useState('')
     setLng(longitude)
      
     if(lat & lng){
-      console.log(lat, lng)
-      setLocated(true)
-      
+      setLocated(true)  
     }
   })
    
@@ -39,7 +39,10 @@ const [addressLink,setAddressLink]= useState('')
       generateRestaurant()
   
    }, [located])
- 
+ const generateCuisine = ()=>{
+  setRandomNumber(Math.floor(Math.random() * 11))
+  return setCuisine(Cuisines[randomNumber])
+ }
 
  async function  generateRestaurant() {
   setRandomNumber(Math.floor(Math.random() * 20))
@@ -61,9 +64,6 @@ const [addressLink,setAddressLink]= useState('')
        setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
        setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
        setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
-     console.log('====================================');
-     console.log(address.slice(-1));
-     console.log('====================================');
        setLoading(false)
 
      }).catch(err => {
@@ -78,9 +78,18 @@ if(loading){
   return(
     <View>
       <ActivityIndicator size='large' color='#95FCF7'/> 
+      <Text>If you dont want to share your location, how about a suggestion on a type of cuisine?</Text>
+      <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
     </View>
     )
-}else {
+  }else if(cuisine){
+ return (
+ <View>
+   <Text>{cuisine}</Text>
+ </View>
+ )
+    
+  }else if(address) {
   return  (
     <View>
 
