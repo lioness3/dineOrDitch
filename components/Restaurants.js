@@ -13,13 +13,13 @@ export default function Restaurants({navigation}) {
   const [lng, setLng]= useState('');
 
   const findCoordinates = () => {
-    console.log('clicked');
+
     
     navigator.geolocation.getCurrentPosition((position) => {
       setLat(position.coords.latitude)
       setLng(position.coords.longitude) 
   
-      console.log(lat);
+      console.log(lat, lng);
       
     });
  
