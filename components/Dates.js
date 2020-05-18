@@ -7,21 +7,22 @@ import DateIdeas from './DateIdeas'
 
 
 export default function Dates() {
-const [date, setDate] = useState('')
-// const [randomNumber, setRandomNumber] = (null)
+const [date, setDate] = useState({title:'', description:''})
+const [randomNumber, setRandomNumber] = (null)
 
 
 
 const generateDate = ()=>{
-    let randomNumber = Math.floor(Math.random() * 20);
-    
-    setDate( DateIdeas[randomNumber])
+     setRandomNumber(Math.floor(Math.random() * 3)) 
+
+   return  setDate({ title:'How about:' + DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
     }
 
 return(
     <View>
         <Button title='Generate Date Idea' onPress={()=>generateDate()}/>
-        <Text>{date}</Text>
+        <Text> {date.title} </Text>
+        <Text>{date.description}</Text>
     </View>
     );
 }

@@ -17,8 +17,8 @@ export default function Restaurants({navigation}) {
 const [loading, setLoading] = useState(true)
 
 
-   const location = navigator.geolocation.getCurrentPosition( (position) =>  {
-      let latitude = position.coords.latitude
+   const location = navigator.geolocation.getCurrentPosition( async(position) =>  {
+      let latitude =  position.coords.latitude
      let longitude =  position.coords.longitude
     setLat(latitude),
     setLng(longitude)
@@ -30,10 +30,6 @@ const [loading, setLoading] = useState(true)
   })
    
     
-
-
-  
-
   
    useEffect( ()=>{
     console.log('generating')
@@ -80,7 +76,7 @@ if(loading){
     <View>
     
     <Text>{restaurant} </Text>
-    <Button title='suggest another' onPress={() => {setLoading(true), generateRestaurant()}}/>
+    <Button title='suggest another restaurant' onPress={() => {setLoading(true), generateRestaurant()}}/>
     
   </View>
 )
