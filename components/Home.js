@@ -12,14 +12,14 @@ export default function Home({navigation}) {
     return(
 <View>
 <Button
-      title="Find a Restaurant idea for me"
+      title="Suggest a Restaurant"
       onPress={() =>
         navigation.navigate('Restaurants')
       }
     />
  
 <Button
-      title="Find a Date idea for me"
+      title="Suggest a Date idea"
       onPress={() =>
         navigation.navigate('Dates')
       }
