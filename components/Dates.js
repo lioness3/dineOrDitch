@@ -8,14 +8,14 @@ import DateIdeas from './DateIdeas'
 
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
-const [randomNumber, setRandomNumber] = (null)
+const [randomNumber, setRandomNumber] = useState(0)
 
 
 
 const generateDate = ()=>{
-     setRandomNumber(Math.floor(Math.random() * 3)) 
-
-   return  setDate({ title:'How about:' + DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
+     setRandomNumber(Math.floor(Math.random() * 22)) 
+   
+   return  setDate({ title: DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
     }
 
 return(

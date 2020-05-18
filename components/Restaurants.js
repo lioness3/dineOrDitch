@@ -14,10 +14,12 @@ export default function Restaurants({navigation}) {
   const [located, setLocated] = useState(false);
   const [restaurant, setRestaurant] = useState('');
   const [randomNumber, setRandomNumber] = useState(0);
-const [loading, setLoading] = useState(true)
+const [loading, setLoading] = useState(true);
+const [address,setAddress] = useState('');
+const [typeOfCuisine,setTypeOfCuisine] = useState('')
+const [addressLink,setAddressLink]= useState('')
 
-
-   const location = navigator.geolocation.getCurrentPosition( async(position) =>  {
+   const location = navigator.geolocation.getCurrentPosition((position) =>  {
       let latitude =  position.coords.latitude
      let longitude =  position.coords.longitude
     setLat(latitude),
@@ -26,6 +28,7 @@ const [loading, setLoading] = useState(true)
     if(lat & lng){
       console.log(lat, lng)
       setLocated(true)
+      
     }
   })
    
@@ -56,13 +59,19 @@ const [loading, setLoading] = useState(true)
        }
      }).then(res => {
        setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
-       setLoading(false)
+       setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
+       setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
+       setLoading(false),
+       setAddressLink(address.split(' ').join('+')),
+       console.log('====================================');
+       console.log(addressLink);
+       console.log('====================================');
      }).catch(err => {
        console.log('error',err.message)
      })
-   
+    
   }
-
+ 
 
 
 if(loading){
@@ -76,6 +85,9 @@ if(loading){
     <View>
     
     <Text>{restaurant} </Text>
+    <Text><a href="http://maps.google.com/maps?q=`(address.split(' ').join('+'))`">{address}</a></Text>
+    <Text>{typeOfCuisine}</Text>
+   
     <Button title='suggest another restaurant' onPress={() => {setLoading(true), generateRestaurant()}}/>
     
   </View>
