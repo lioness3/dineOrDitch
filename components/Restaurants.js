@@ -76,15 +76,16 @@ const [cuisine, setCuisine]= useState(null)
 
 if(loading){
   return(
-    <View>
+    <View style={styles.container}>
       <ActivityIndicator size='large' color='#95FCF7'/> 
+      <Text>Thinking of a suggestion for you...</Text>
       <Text>If you dont want to share your location, how about a suggestion on a type of cuisine?</Text>
       <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
     </View>
     )
   }else if(cuisine){
  return (
- <View>
+ <View style={styles.container}>
    <Text>{cuisine}</Text>
  </View>
  )
@@ -92,14 +93,29 @@ if(loading){
   }else if(address) {
   return  (
     <View>
-
+<View style={styles.container}>
     <Text>{restaurant} </Text>
     <Text>{address}</Text>
     <Text>{typeOfCuisine}</Text>
+    </View>
+    <View style={styles.buttons}>
     <Button title='Dine' onPress={()=>{alert('open maps')}}/>
     <Button title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
-    
+    </View>
   </View>
 )
  }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttons: {
+    width: 100,
+    justifyContent: 'center',
+   
+  }
+});
