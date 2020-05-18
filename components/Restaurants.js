@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button,ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button,ActivityIndicator, Link } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import Dates from './Dates';
@@ -61,17 +61,17 @@ const [addressLink,setAddressLink]= useState('')
        setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
        setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
        setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
-       setLoading(false),
-       setAddressLink(address.split(' ').join('+')),
-       console.log('====================================');
-       console.log(addressLink);
-       console.log('====================================');
+     console.log('====================================');
+     console.log(address.slice(-1));
+     console.log('====================================');
+       setLoading(false)
+
      }).catch(err => {
        console.log('error',err.message)
      })
     
   }
- 
+
 
 
 if(loading){
@@ -80,15 +80,15 @@ if(loading){
       <ActivityIndicator size='large' color='#95FCF7'/> 
     </View>
     )
-}else{
+}else {
   return  (
     <View>
-    
+
     <Text>{restaurant} </Text>
-    <Text><a href="http://maps.google.com/maps?q=`(address.split(' ').join('+'))`">{address}</a></Text>
+    <Text>{address}</Text>
     <Text>{typeOfCuisine}</Text>
-   
-    <Button title='suggest another restaurant' onPress={() => {setLoading(true), generateRestaurant()}}/>
+    <Button title='Dine' onPress={()=>{alert('open maps')}}/>
+    <Button title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
     
   </View>
 )
