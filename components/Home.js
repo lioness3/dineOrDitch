@@ -8,30 +8,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 
-export default function Restaurants({navigation}) {
-  const [lat, setLat]= useState('');
-  const [lng, setLng]= useState('');
-
-  const findCoordinates = () => {
-    console.log('clicked');
-    
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude)
-      setLng(position.coords.longitude) 
-  
-      console.log(lat);
-      
-    });
- 
-  }
-  
+export default function Home({navigation}) {
     return(
 <View>
-
-
-<Button onPress={()=>findCoordinates()
-} title='Share Current Location' />
-
+<Button
+      title="Find a Restaurant idea for me"
+      onPress={() =>
+        navigation.navigate('Restaurants')
+      }
+    />
+ 
 <Button
       title="Find a Date idea for me"
       onPress={() =>
