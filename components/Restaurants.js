@@ -21,25 +21,22 @@ const [typeOfCuisine,setTypeOfCuisine] = useState('')
 const [addressLink,setAddressLink]= useState('')
 const [cuisine, setCuisine]= useState(null)
 
-   const location = navigator.geolocation.getCurrentPosition((position) =>  {
+ navigator.geolocation.getCurrentPosition((position) =>  {
       let latitude =  position.coords.latitude
      let longitude =  position.coords.longitude
     setLat(latitude),
     setLng(longitude)
      
-    if(lat & lng){
+    if(lng){
       setLocated(true)  
     }
   })
    
     
   
-   useEffect( ()=>{
-    console.log('generating')
-      generateRestaurant()
-  
-   }, [located])
+
  const generateCuisine = ()=>{
+   setLoading(false)
   setRandomNumber(Math.floor(Math.random() * 11))
   return setCuisine(Cuisines[randomNumber])
  }
@@ -61,7 +58,7 @@ const [cuisine, setCuisine]= useState(null)
          'sort': 'real_distance'
        }
      }).then(res => {
-       setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
+     setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
        setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
        setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
        setLoading(false)
@@ -71,14 +68,19 @@ const [cuisine, setCuisine]= useState(null)
      })
     
   }
+  useEffect( ()=>{
 
+    generateRestaurant()
+
+ }, [located])
 
 
 if(loading){
   return(
     <View style={styles.container}>
-      <ActivityIndicator size='large' color='#95FCF7'/> 
       <Text>Thinking of a suggestion for you...</Text>
+      <ActivityIndicator size='large' color='#95FCF7'/> 
+      
       <Text>If you dont want to share your location, how about a suggestion on a type of cuisine?</Text>
       <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
     </View>
@@ -90,10 +92,10 @@ if(loading){
  </View>
  )
     
-  }else if(address) {
+  }else if(restaurant) {
   return  (
-    <View>
-<View style={styles.container}>
+    <View style={styles.container}>
+<View >
     <Text>{restaurant} </Text>
     <Text>{address}</Text>
     <Text>{typeOfCuisine}</Text>
