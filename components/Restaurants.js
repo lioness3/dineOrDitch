@@ -7,6 +7,7 @@ import Dates from './Dates';
 import Cuisines from './Cuisines';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
+import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
 
 export default function Restaurants({navigation}) {
@@ -54,7 +55,7 @@ const [cuisine, setCuisine]= useState(null)
  
          // 'lat': '45.5047512',
          // 'lon': '-122.8462298',
-         'radius':'600',
+         'radius':'8000',
          'sort': 'real_distance'
        }
      }).then(res => {
@@ -74,7 +75,10 @@ const [cuisine, setCuisine]= useState(null)
 
  }, [located])
 
-
+const openMap = (restaurant)=>{
+  
+  Linking.openURL('https://www.google.com/maps/search/?api=1&query='+`${restaurant}`)
+}
 if(loading){
   return(
     <View style={styles.container}>
@@ -101,7 +105,7 @@ if(loading){
     <Text>{typeOfCuisine}</Text>
     </View>
     <View style={styles.buttons}>
-    <Button title='Dine' onPress={()=>{alert('open maps')}}/>
+    <Button title='Dine' onPress={()=>{openMap(restaurant)}}/>
     <Button title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
     </View>
   </View>
