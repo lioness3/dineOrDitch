@@ -6,19 +6,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Dates from './components/Dates';
 import Restaurants from './components/Restaurants';
-import Home from './components/Home'
+import Home from './components/Home';
+import Cuisines from './components/Cuisines'
 export default function App({navigation}) {
 
-  const [display, setDisplay] = useState(false)
-  const [text, setText] = useState('Cant decide where to eat?')
-  const [restaurant, setRestaurant] = useState('')
+
 
   const Stack = createStackNavigator();
   
 
-  const handleRestaurantSelection = () =>{
-   setRestaurant('Joes')
-  }
+ 
   
     return (
       <NavigationContainer>
@@ -26,14 +23,23 @@ export default function App({navigation}) {
           <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: 'How can I help?' }}
+          options={{ title: 'How can I help?' , headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
+      
+         
         />
            <Stack.Screen
           name="Restaurants"
           component={Restaurants}
-          options={{ title: 'Cant decide where to Eat?' }}
+          options={{ title: 'Restaurant Generator', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
         />
-        <Stack.Screen name="Dates" component={Dates} options={{title: 'Need Date Ideas?'}} />
+          <Stack.Screen
+          name="Cuisines"
+          component={Cuisines}
+          options={{ title: 'Cuisine Ideas', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
+        />
+        <Stack.Screen name="Dates" 
+        component={Dates}
+         options={{title: 'Date Ideas', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }} />
       </Stack.Navigator>
 
       </NavigationContainer>
@@ -43,11 +49,3 @@ export default function App({navigation}) {
 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

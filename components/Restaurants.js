@@ -36,11 +36,7 @@ const [cuisine, setCuisine]= useState(null)
     
   
 
- const generateCuisine = ()=>{
-   setLoading(false)
-  setRandomNumber(Math.floor(Math.random() * 11))
-  return setCuisine(Cuisines[randomNumber])
- }
+
 
  async function  generateRestaurant() {
   setRandomNumber(Math.floor(Math.random() * 20))
@@ -84,18 +80,8 @@ if(loading){
     <View style={styles.container}>
       <Text>Thinking of a suggestion for you...</Text>
       <ActivityIndicator size='large' color='#95FCF7'/> 
-      
-      <Text>If you dont want to share your location, how about a suggestion on a type of cuisine?</Text>
-      <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
     </View>
     )
-  }else if(cuisine){
- return (
- <View style={styles.container}>
-   <Text>{cuisine}</Text>
- </View>
- )
-    
   }else if(restaurant) {
   return  (
     <View style={styles.container}>

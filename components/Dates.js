@@ -15,14 +15,37 @@ const [randomNumber, setRandomNumber] = useState(0)
 const generateDate = ()=>{
      setRandomNumber(Math.floor(Math.random() * 22)) 
    
-   return  setDate({ title: DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
+     setDate({ title: DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
     }
 
 return(
-    <View>
+    <View style={styles.container}>
         <Button title='Generate Date Idea' onPress={()=>generateDate()}/>
-        <Text> {date.title} </Text>
-        <Text>{date.description}</Text>
+        <Text style={styles.title}> {date.title} </Text>
+        <Text style={styles.description}>{date.description}</Text>
     </View>
     );
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'black',
+      alignItems: 'center',
+     paddingTop:20,
+     fontSize:20,
+     paddingHorizontal:30
+    },
+    title:{
+        color:'#58E80B',
+        padding:10,
+        fontSize:20, 
+        fontWeight:'bold' 
+       
+    },
+    description:{
+        color:'#58E80B',
+        paddingHorizontal:20,
+        fontSize:20, 
+        fontWeight:'bold' 
+    }
+  });

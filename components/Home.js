@@ -10,14 +10,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 export default function Home({navigation}) {
     return(
-<View>
+<View style={styles.container}>
 <Button
       title="Suggest a Restaurant"
       onPress={() =>
         navigation.navigate('Restaurants')
       }
     />
- 
+ <Button
+      title="Suggest a Cuisine"
+      onPress={() =>
+        navigation.navigate('Cuisines')
+      }
+    />
 <Button
       title="Suggest a Date idea"
       onPress={() =>
@@ -27,3 +32,11 @@ export default function Home({navigation}) {
 </View>
     );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
