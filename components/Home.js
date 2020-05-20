@@ -4,15 +4,18 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import Dates from './Dates';
+import Restaurants from './Restaurants';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
 
 export default function Home({navigation}) {
     return(
+
+  
 <View style={styles.container}>
+
 <Button
       title="Suggest a Restaurant"
+
       onPress={() =>
         navigation.navigate('Restaurants')
       }
