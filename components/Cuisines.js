@@ -17,7 +17,7 @@ const generateCuisine = ()=>{
 
 return(
     <View style={styles.container}>
-      <Text style={styles.head}>No Location acces? No Problem! Ill suggest a type of cuisine instead!</Text>
+      <Text style={styles.head}>Dont want to share your location? {'\n'} No problem! {'\n'}Ill suggest a type of cuisine instead!</Text>
       <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
       <Text style={styles.idea}>{cuisine}</Text>
     </View>
@@ -35,13 +35,16 @@ const styles = StyleSheet.create({
     },
     head:{
         color:'white',
-        paddingTop:10,
+        margin:10,
         fontSize:20, 
+        textAlign:'center'
     },
     idea:{
         color:'#58E80B',
-        paddingTop:10,
+       
         fontSize:20, 
-        fontWeight:'bold'
-    }
+        fontWeight:'bold',
+      
+    },
+ 
   });

@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
+import { Logs } from 'expo';
 
 export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
@@ -58,7 +59,9 @@ const [cuisine, setCuisine]= useState(null)
      setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
        setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
        setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
-       setLoading(false)
+       setLoading(false),
+       console.log(res.data.restaurants[randomNumber].restaurant.location);
+       
 
      }).catch(err => {
        console.log('error',err.message)
@@ -68,7 +71,7 @@ const [cuisine, setCuisine]= useState(null)
   useEffect( ()=>{
 
     generateRestaurant()
-
+  
  }, [located])
 
 const openMap = (restaurant)=>{
@@ -78,21 +81,24 @@ const openMap = (restaurant)=>{
 if(loading){
   return(
     <View style={styles.container}>
-      <Text>Thinking of a suggestion for you...</Text>
+      <Text style={styles.instructions}>Thinking of a suggestion for you...</Text>
       <ActivityIndicator size='large' color='#95FCF7'/> 
     </View>
     )
   }else if(restaurant) {
   return  (
     <View style={styles.container}>
-<View >
-    <Text>{restaurant} </Text>
-    <Text>{address}</Text>
-    <Text>{typeOfCuisine}</Text>
+      <Text style={styles.instructions}>Press 'Dine' for directions or 'Ditch' for another selection. </Text>
+<View style={styles.card}>
+<Text style={styles.name}>{restaurant} </Text>
+<Text style={styles.type}>{typeOfCuisine}</Text>
+  
+    <Text style={styles.info}>{address}</Text>
+
     </View>
     <View style={styles.buttons}>
-    <Button title='Dine' onPress={()=>{openMap(restaurant)}}/>
-    <Button title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
+    <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
+    <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
     </View>
   </View>
 )
@@ -101,13 +107,37 @@ if(loading){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
+    
+  },
+  instructions:{
+    color:'white',
   },
   buttons: {
-    width: 100,
-    justifyContent: 'center',
+   
+    flexDirection:'row',
+    margin:30,
+    padding:30,
+    justifyContent:'space-around'
+   
+   
+  },
+  card: {
+  
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius:10,
+  },
+  name:{
+    fontSize: 40
+  },
+  info:{
+    fontSize: 20
+  },
+  type:{
+    fontSize: 10,
    
   }
 });

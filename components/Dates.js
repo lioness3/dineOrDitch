@@ -28,12 +28,12 @@ return(
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: 'black',
-      alignItems: 'center',
-     paddingTop:20,
-     fontSize:20,
-     paddingHorizontal:30
+        flex: 1,
+        backgroundColor: 'black',
+        alignItems: 'center',
+        paddingTop:20,
+        fontSize:20,
+        paddingHorizontal:30
     },
     title:{
         color:'#58E80B',

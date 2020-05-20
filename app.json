@@ -4,8 +4,7 @@
     "slug": "dineOrDitch",
     "platforms": [
       "ios",
-      "android",
-    
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,6 +22,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "When you cant decide where to eat, let Dine or Ditch decide."
   }
 }

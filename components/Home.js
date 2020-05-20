@@ -19,6 +19,7 @@ export default function Home({navigation}) {
     />
  <Button
       title="Suggest a Cuisine"
+      margin={20}
       onPress={() =>
         navigation.navigate('Cuisines')
       }
@@ -35,8 +36,9 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:'row',
     backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });
