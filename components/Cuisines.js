@@ -4,7 +4,7 @@ import CuisineIdeas from './CuisineIdeas'
 
 
 export default function Dates() {
-const [cuisine, setCuisine] = useState('')
+const [cuisine, setCuisine] = useState(null)
 const [randomNumber, setRandomNumber] = useState(0)
 const [title, setTitle] = useState('Generate Cuisine Idea')
 const [color, setColor] = useState('blue')
