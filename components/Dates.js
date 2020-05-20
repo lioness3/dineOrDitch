@@ -9,18 +9,20 @@ import DateIdeas from './DateIdeas'
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
 const [randomNumber, setRandomNumber] = useState(0)
-
+const [title, setTitle] = useState('Generate Date Idea')
+const [color, setColor] = useState('blue')
 
 
 const generateDate = ()=>{
      setRandomNumber(Math.floor(Math.random() * 22)) 
-   
+     setTitle('Ditch')
+     setColor('red')
      setDate({ title: DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
     }
 
 return(
     <View style={styles.container}>
-        <Button title='Generate Date Idea' onPress={()=>generateDate()}/>
+        <Button title={title} onPress={()=>generateDate()} color={color}/>
         <Text style={styles.title}> {date.title} </Text>
         <Text style={styles.description}>{date.description}</Text>
     </View>
