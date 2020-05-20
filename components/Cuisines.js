@@ -11,8 +11,10 @@ const [color, setColor] = useState('blue')
 const generateCuisine = ()=>{
   setTitle('Ditch')
   setColor('red')
-   setRandomNumber(Math.floor(Math.random() * 11))
-   setCuisine(CuisineIdeas[randomNumber])
+  let num = Math.floor(Math.random() * 11)
+   setRandomNumber(num)
+   let idea = CuisineIdeas[randomNumber]
+   setCuisine(idea)
   }
 
 
@@ -20,7 +22,7 @@ const generateCuisine = ()=>{
 return(
     <View style={styles.container}>
       <Text style={styles.head}>Dont want to share your location? {'\n'} No problem! {'\n'}Let's suggest a type of cuisine instead!</Text>
-      <Button title = {title} onPress={generateCuisine} color={color}/>
+      <Button title = {title} onPress={()=>{generateCuisine()}} color={color}/>
       <Text style={styles.idea}>{cuisine}</Text>
     </View>
     );
