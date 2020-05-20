@@ -19,7 +19,7 @@ export default function Home({navigation}) {
     />
  <Button
       title="Suggest a Cuisine"
-      margin={20}
+   
       onPress={() =>
         navigation.navigate('Cuisines')
       }

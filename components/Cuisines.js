@@ -17,7 +17,7 @@ const generateCuisine = ()=>{
 
 return(
     <View style={styles.container}>
-      <Text style={styles.head}>Dont want to share your location? {'\n'} No problem! {'\n'}Ill suggest a type of cuisine instead!</Text>
+      <Text style={styles.head}>Dont want to share your location? {'\n'} No problem! {'\n'}Let's suggest a type of cuisine instead!</Text>
       <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
       <Text style={styles.idea}>{cuisine}</Text>
     </View>
