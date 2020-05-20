@@ -46,9 +46,12 @@ export default function App({navigation}) {
         component={Dates}
          options={{title: 'Date Ideas', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }} />
       </Stack.Navigator> */}
+      
         <Tab.Navigator tabBarOptions={{activeTintColor: 'tomato',
-          inactiveTintColor: 'gray'}} >
-          <Tab.Screen name="Date" component={Dates} />
+          inactiveTintColor: 'gray',   style: {
+            backgroundColor: '#171F33' 
+        }}} >
+          <Tab.Screen name="Date" component={Dates} tabBarIcon="message-text-outline" />
           <Tab.Screen name="Restaurants" component={Restaurants} />
           <Tab.Screen name='Cuisines' component={Cuisines} />
         </Tab.Navigator>
