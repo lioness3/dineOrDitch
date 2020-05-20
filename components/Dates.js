@@ -8,16 +8,24 @@ import DateIdeas from './DateIdeas'
 
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
-const [randomNumber, setRandomNumber] = useState(0)
+
 const [title, setTitle] = useState('Generate Date Idea')
 const [color, setColor] = useState('blue')
 
 
-const generateDate = ()=>{
-     setRandomNumber(Math.floor(Math.random() * 22)) 
+const generateDate = async()=>{
+    let num = Math.floor(Math.random() * 21)
+     
+     let ideas = DateIdeas[num]
+    
+     
+ let titleIdea = ideas.title
+ let descriptionIdea = ideas.description 
+
+ 
+     setDate({ title: titleIdea, description: descriptionIdea})
      setTitle('Ditch')
      setColor('red')
-     setDate({ title: DateIdeas[randomNumber].title, description:DateIdeas[randomNumber].description})
     }
 
 return(

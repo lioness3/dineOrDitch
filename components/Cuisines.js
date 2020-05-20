@@ -5,13 +5,13 @@ import CuisineIdeas from './CuisineIdeas'
 
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
-const [randomNumber, setRandomNumber] = useState(0)
+
 const [title, setTitle] = useState('Generate Cuisine Idea')
 const [color, setColor] = useState('blue')
 const  generateCuisine = async()=>{
 
   let num =  Math.floor(Math.random() * 10)
-   setRandomNumber(num)
+
    let idea = CuisineIdeas[num];
    console.log(idea, num);
    setCuisine(idea)
