@@ -28,7 +28,7 @@ export default function App({navigation}) {
           <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: 'How can I help?' , headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
+          options={{ title: 'Feeling Indesicive?' , headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
       
          
         />
