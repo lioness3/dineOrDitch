@@ -8,13 +8,16 @@ const [cuisine, setCuisine] = useState(null)
 const [randomNumber, setRandomNumber] = useState(0)
 const [title, setTitle] = useState('Generate Cuisine Idea')
 const [color, setColor] = useState('blue')
-const generateCuisine = ()=>{
-  setTitle('Ditch')
-  setColor('red')
-  let num = Math.floor(Math.random() * 11)
+const  generateCuisine = async()=>{
+
+  let num =  Math.floor(Math.random() * 10)
    setRandomNumber(num)
-   let idea = CuisineIdeas[randomNumber]
+   let idea = CuisineIdeas[num];
+   console.log(idea, num);
    setCuisine(idea)
+
+   setTitle('Ditch')
+   setColor('red')
   }
 
 
