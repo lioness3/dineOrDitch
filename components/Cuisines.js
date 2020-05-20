@@ -6,11 +6,13 @@ import CuisineIdeas from './CuisineIdeas'
 export default function Dates() {
 const [cuisine, setCuisine] = useState('')
 const [randomNumber, setRandomNumber] = useState(0)
-
+const [title, setTitle] = useState('Generate Cuisine Idea')
+const [color, setColor] = useState('blue')
 const generateCuisine = ()=>{
-  
+  setTitle('Ditch')
+  setColor('red')
    setRandomNumber(Math.floor(Math.random() * 11))
-   return setCuisine(CuisineIdeas[randomNumber])
+   setCuisine(CuisineIdeas[randomNumber])
   }
 
 
@@ -18,7 +20,7 @@ const generateCuisine = ()=>{
 return(
     <View style={styles.container}>
       <Text style={styles.head}>Dont want to share your location? {'\n'} No problem! {'\n'}Let's suggest a type of cuisine instead!</Text>
-      <Button title = 'Generate Cuisine Idea' onPress={generateCuisine}/>
+      <Button title = {title} onPress={generateCuisine} color={color}/>
       <Text style={styles.idea}>{cuisine}</Text>
     </View>
     );

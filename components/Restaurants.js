@@ -88,7 +88,7 @@ if(loading){
   }else if(restaurant) {
   return  (
     <View style={styles.container}>
-      <Text style={styles.instructions}>Press 'Dine' for directions or 'Ditch' for another selection. </Text>
+     
 <View style={styles.card}>
 <Text style={styles.name}>{restaurant} </Text>
 <Text style={styles.type}>{typeOfCuisine}</Text>
@@ -100,6 +100,7 @@ if(loading){
     <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
     <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
     </View>
+    <Text style={styles.instructions}>Press 'Dine' for directions or 'Ditch' for another selection. </Text>
   </View>
 )
  }
