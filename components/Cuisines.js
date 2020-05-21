@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import CuisineIdeas from './CuisineIdeas'
-
-
+import axios from 'axios';
+import * as Linking from 'expo-linking';
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
-const [instructions, setInstructions] = useState('Dont want to share your location?' + `${'\n'}` + 'No problem!'+ `${'\n'}` + 'let/s suggest a type of cuisine instead!')
-const [title, setTitle] = useState('Generate Cuisine Idea')
+const [instructions, setInstructions] = useState("Select 'Cuisine' to generate a type of food to try.")
+const [title, setTitle] = useState('Cuisine')
 const [color, setColor] = useState('blue')
 const  generateCuisine = async()=>{
 
@@ -25,9 +25,8 @@ setInstructions("Press 'Ditch' for another cuisine suggestion.")
   return(
     <View style={styles.container}>
       <Text style={styles.idea}>{cuisine}</Text>
- 
       <Button title = {title} onPress={()=>{generateCuisine()}} color={color}/>
-      <Text style={styles.head}>{instructions}</Text>
+      <Text style={styles.instructions}>{instructions}</Text>
     </View>
     );
 
@@ -35,15 +34,16 @@ setInstructions("Press 'Ditch' for another cuisine suggestion.")
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 3,
       backgroundColor: 'black',
       alignItems: 'center',
-     paddingTop:20,
+     paddingVertical:100,
 
      paddingHorizontal:30,
  
     },
-    head:{
+    instructions:{
+
         color:'white',
         margin:10,
         fontSize:10, 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     idea:{
-      flex:.8,
+        flex:2,
         color:'#58E80B',
        
         fontSize:50, 
