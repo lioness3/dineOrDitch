@@ -10,7 +10,7 @@
     "orientation": "portrait",
     "icon": "./assets/iconFork.png",
     "splash": {
-      "image": "./assets/hungry.png",
+      "image": "./assets/iconFork.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

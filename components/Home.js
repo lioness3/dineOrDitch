@@ -24,7 +24,7 @@ export default function Home({navigation}) {
             </Text>
           </TouchableHighlight>
           <Text style={styles.instructions}>
-             Select 'Restaurant' for a randomly generated restaurant in your area. {'\n'} *note: this action requires you to share your location
+             Select 'Restaurant' for a randomly generated restaurant in your area. 
           </Text>
         </View>
         <View style={styles.card}>
@@ -83,20 +83,14 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
   card:{
-    
-  
     width:350,
-
     marginVertical:10
   },
   instructions:{
- 
     color:'white',
     backgroundColor:'black',
-    fontSize:10,
-    fontWeight:'bold',
-   paddingVertical:10,
-   
+    fontSize:15,
+    paddingVertical:10,
     textAlign:'center',
     
   }

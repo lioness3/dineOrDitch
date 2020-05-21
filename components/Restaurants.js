@@ -10,18 +10,18 @@ import axios from 'axios';
 import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
 import { Logs } from 'expo';
-
+import { TouchableHighlight } from 'react-native-gesture-handler';
 export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(0);
+
 const [loading, setLoading] = useState(true);
 const [address,setAddress] = useState('');
 const [typeOfCuisine,setTypeOfCuisine] = useState('')
-const [addressLink,setAddressLink]= useState('')
-const [cuisine, setCuisine]= useState(null)
+
+
 
 
 const openSettings = ()=>{
@@ -57,25 +57,12 @@ const openSettings = ()=>{
       setLat(lat),
       setLng(lng),
       setLocated(true)
-      console.log(lat,lng);
+     
      
       
     }
 }
 
-//  const getLocation =  navigator.geolocation.getCurrentPosition((position) =>  {
-//  
-//  
-   
-//   if(lng){
-//     setLocated(true)  
-//   }
-// })
-// }
-
-   
-    
-  
 
 
 
@@ -83,7 +70,7 @@ const openSettings = ()=>{
    if(!lat){
      handleLocationPermission()
    }else{
-    setRandomNumber(Math.floor(Math.random() * 20))
+    let randomNumber = Math.floor(Math.random() * 20)
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
@@ -99,11 +86,15 @@ const openSettings = ()=>{
          'sort': 'real_distance'
        }
      }).then(res => {
-     setRestaurant(res.data.restaurants[randomNumber].restaurant.name),
-       setAddress(res.data.restaurants[randomNumber].restaurant.location.address),
-       setTypeOfCuisine(res.data.restaurants[randomNumber].restaurant.cuisines),
-       setLoading(false),
-       console.log(res.data.restaurants[randomNumber].restaurant.location);
+       let restaurant = res.data.restaurants[randomNumber].restaurant.name
+       let address = res.data.restaurants[randomNumber].restaurant.location.address
+       let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
+     setRestaurant(restaurant),
+       setAddress(address),
+       setTypeOfCuisine(typeOfCuisine),
+       setLoading(false)
+      console.log(randomNumber,restaurant);
+      
        
 
      }).catch(err => {
@@ -123,6 +114,7 @@ const openMap = (restaurant)=>{
   
   Linking.openURL('https://www.google.com/maps/search/?api=1&query='+`${restaurant}`)
 }
+
 if(loading){
   return(
     <View style={styles.container}>
@@ -140,10 +132,21 @@ if(loading){
         
         <Text style={styles.info}>{address}</Text>
       </View>
-      <View style={styles.buttons}>
-        <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
-        <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
-      </View>
+    
+      <TouchableHighlight underlayColor='green'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
+              <Text style={styles.button }>
+                 Dine 
+              </Text>
+          </TouchableHighlight>
+          <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
+              <Text style={styles.ditchButton }>
+                 Ditch
+              </Text>
+          </TouchableHighlight>
+          
+        {/* <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
+        <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/> */}
+   
       <Text style={styles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
   )
@@ -151,48 +154,57 @@ if(loading){
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
+   paddingHorizontal:30,
     
   },
   instructions:{
     color:'white',
    padding:30,
-   textAlign:'center'
+   textAlign:'center',
+   fontWeight:'bold'
   },
-  buttons: {
+  button:{
+   marginTop :20,
+    color:'#13AF50',
+    fontSize:30,
    
-    flexDirection:'row',
-    margin:30,
-    padding:30,
-    justifyContent:'space-around'
-   
-   
-  },
+},
+ditchButton:{
+  
+    color:'red',
+    fontSize:30
+},
   card: {
-  flex:.5,
-    backgroundColor: 'white',
+
+    
     padding: 20,
     borderRadius:10,
+    backgroundColor:'#354047',
+    // textShadowColor:'#95FCF7',
+    // textShadowRadius:60,
     shadowColor:'#BBE2FB',
-    shadowRadius:30,
+    shadowRadius:3,
     shadowOpacity:0.5,
+
     
   },
   name:{
-    
+    marginVertical:30,
     fontSize: 30,
-    borderBottomColor:'green',
-    borderBottomWidth:3,
-    textAlign:'center'
+    color:'white',
+    textAlign:'center',
+    fontWeight:'bold'
   },
   info:{
-    fontSize: 15
+    fontSize: 15,
+    fontWeight:'bold'
   },
   type:{
     fontSize: 10,
-   
+    fontWeight:'bold'
   }
 });

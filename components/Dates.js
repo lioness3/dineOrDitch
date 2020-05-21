@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import { createStackNavigator } from '@react-navigation/stack';
 import DateIdeas from './DateIdeas'
 
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
@@ -30,7 +31,13 @@ if(date.title){
            
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
-            <Button title='Ditch' onPress={()=>generateDate()} color='red'/>
+            <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
+          generateDate()
+          }>
+              <Text style={styles.ditchButton }>
+                 Ditch
+              </Text>
+          </TouchableHighlight>
             <Text style={styles.instructions}>Press 'Ditch' for another date suggestion.</Text>
         </View>
         );
@@ -38,7 +45,13 @@ if(date.title){
     return(
         <View style={styles.container}>
         <Text style={styles.header}>For the times when it's difficult to come up with something fun to do.</Text>
-        <Button title='Date Idea' onPress={()=>generateDate()} color='blue'/>
+        <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
+          generateDate()
+          }>
+              <Text style={styles.button }>
+                 Date Idea
+              </Text>
+          </TouchableHighlight>
         <Text style={styles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
         
     </View>
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
         flex:.5,
         color:'white',
         margin:10,
-        fontSize:10, 
+        fontSize:20, 
         textAlign:'center',
         fontWeight:'bold',
         paddingHorizontal:30
@@ -81,8 +94,8 @@ const styles = StyleSheet.create({
         fontSize:30, 
         fontWeight:'bold' ,
         textAlign:'center',
-        borderColor:'white',
-        borderWidth:2
+        // borderColor:'white',
+        // borderWidth:2
      
        
     },
@@ -95,6 +108,18 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         borderColor:'white',
         borderWidth:2,
-        marginTop:20
+        margin:20,
+        backgroundColor:'#869EAE'
+    },
+    button:{
+       
+        color:'#0E9EF9',
+        fontSize:30,
+       
+    },
+    ditchButton:{
+       
+        color:'red',
+        fontSize:30
     }
   });
