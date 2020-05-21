@@ -16,37 +16,37 @@ export default function Home({navigation}) {
         <Text style={styles.header}>I have some ideas in store for you...</Text>
         <View style={styles.card}>
           <Text style={styles.instructions}>
-            Click below for a randomly generated restaurant in your area. {'\n'} *note: this action requires you to share your location
+            Hungry now but don't know what to eat? Press below for a randomly generated restaurant in your area. {'\n'} *note: this action requires you to share your location
           </Text>
           <TouchableHighlight underlayColor='blue'activeOpacity={.5} onPress={() =>
           navigation.navigate('Restaurants')
           }>
             <Text style={styles.button}>
-               Find a Restaurant Suggestion
+                Restaurant 
             </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.card}>
           <Text style={styles.instructions}>
-            Click below for a randomly generated cuisine suggestion.
+            Press below for a randomly generated cuisine suggestion.
           </Text>
           <TouchableHighlight underlayColor='green'activeOpacity={.5} onPress={() =>
           navigation.navigate('Cuisines')
           }>
               <Text style={styles.button }>
-                Find a Cuisine Suggestion
+                 Cuisine 
               </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.card}>
           <Text style={styles.instructions}>
-          Click below for a randomly generated date suggestion.
+          Press below for a randomly generated date suggestion.
           </Text>
           <TouchableHighlight  underlayColor='yellow'activeOpacity={.5} onPress={() =>
           navigation.navigate('Dates')
           }>
             <Text style={styles.button }>
-              Find a Date Idea
+             Activity
             </Text>
           </TouchableHighlight>
         </View>
@@ -62,26 +62,26 @@ const styles = StyleSheet.create({
     
   },
   header:{
-    flex:.5,
+   
     color:'white',
     padding:10
   },
   button:{
-   
+    borderColor:'green',
+    borderWidth:5,
     color:'white',
      backgroundColor:'black',
      borderRadius:10,
     padding:10,
     fontSize:20,
-    fontWeight:'bolder',
+    fontWeight:'bold',
     textAlign:'center'
   },
   card:{
     flex:1.5,
-    backgroundColor:'white',
+    backgroundColor:'grey',
     width:350,
-    borderColor:'green',
-    borderWidth:5,
+
     paddingHorizontal:3,
     paddingVertical:30,
     borderRadius:5,

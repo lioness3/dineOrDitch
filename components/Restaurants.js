@@ -81,28 +81,26 @@ const openMap = (restaurant)=>{
 if(loading){
   return(
     <View style={styles.container}>
-      <Text style={styles.instructions}>Thinking of a suggestion for you...</Text>
+      <Text style={styles.instructions}>Thinking...</Text>
       <ActivityIndicator size='large' color='#95FCF7'/> 
     </View>
     )
   }else if(restaurant) {
-  return  (
+  return (
     <View style={styles.container}>
-     
-<View style={styles.card}>
-<Text style={styles.name}>{restaurant} </Text>
-<Text style={styles.type}>{typeOfCuisine}</Text>
-  
-    <Text style={styles.info}>{address}</Text>
-
+      
+      <View style={styles.card}>
+        <Text style={styles.name}>{restaurant} </Text>
+        <Text style={styles.type}>{typeOfCuisine}</Text>
+        <Text style={styles.info}>{address}</Text>
+      </View>
+      <View style={styles.buttons}>
+        <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
+        <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
+      </View>
+      <Text style={styles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
-    <View style={styles.buttons}>
-    <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
-    <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/>
-    </View>
-    <Text style={styles.instructions}>Press 'Dine' for directions or 'Ditch' for another selection. </Text>
-  </View>
-)
+  )
  }
 }
 const styles = StyleSheet.create({
@@ -115,6 +113,8 @@ const styles = StyleSheet.create({
   },
   instructions:{
     color:'white',
+   padding:30,
+   textAlign:'center'
   },
   buttons: {
    
@@ -132,7 +132,9 @@ const styles = StyleSheet.create({
     borderRadius:10,
   },
   name:{
-    fontSize: 40
+    fontSize: 40,
+    borderBottomColor:'green',
+    borderBottomWidth:3
   },
   info:{
     fontSize: 20

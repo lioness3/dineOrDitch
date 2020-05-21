@@ -13,61 +13,87 @@ const [title, setTitle] = useState('Generate Date Idea')
 const [color, setColor] = useState('blue')
 
 
-const generateDate = async()=>{
+const generateDate = ()=>{
     let num = Math.floor(Math.random() * 21)
-     
-     let ideas = DateIdeas[num]
-    
-     
- let titleIdea = ideas.title
- let descriptionIdea = ideas.description 
+    let ideas = DateIdeas[num] 
+    let titleIdea = ideas.title
+    let descriptionIdea = ideas.description 
 
- setInstructions("Press 'Ditch' for another cuisine suggestion.")
+    
      setDate({ title: titleIdea, description: descriptionIdea})
-     setTitle('Ditch')
+
      setColor('red')
     }
-
-return(
-    <View style={styles.container}>
-       
-        <Text style={styles.title}> {date.title} </Text>
-        <Text style={styles.description}>{date.description}</Text>
-        <Button title={title} onPress={()=>generateDate()} color={color}/>
-        <Text style={styles.instructions}>{instructions}</Text>
+if(date.title){
+    return(
+        <View style={styles.container}>
+           
+            <Text style={styles.title}> {date.title} </Text>
+            <Text style={styles.description}>{date.description}</Text>
+            <Button title='Ditch' onPress={()=>generateDate()} color='red'/>
+            <Text style={styles.instructions}>Press 'Ditch' for another date suggestion.</Text>
+        </View>
+        );
+}else{
+    return(
+        <View style={styles.container}>
+        <Text style={styles.header}>For the times when it's difficult to come up with something fun to do.</Text>
+        <Button title='Date Idea' onPress={()=>generateDate()} color='blue'/>
+        <Text style={styles.instructions}> Press 'Date Idea' for a randomly generated date suggestion!</Text>
+        
     </View>
-    );
+    )
+
+}
+
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 3,
+        flex: 1,
         backgroundColor: 'black',
         alignItems: 'center',
         paddingTop:20,
+        borderColor:'#58E80B',
+        borderWidth:30,
      
-        paddingHorizontal:30
+    },
+    header:{
+        color:'white',
+        margin:10,
+        fontSize:15, 
+        textAlign:'center',
+        fontWeight:'bold' ,
+        paddingHorizontal:10
     },
     instructions:{
         color:'white',
         margin:10,
         fontSize:10, 
         textAlign:'center',
-        fontWeight:'bold'
+        fontWeight:'bold',
+        paddingHorizontal:30
     },
     title:{
-        flex:.5,
-        color:'#58E80B',
+     
+        color:'white',
         padding:10,
-        fontSize:40, 
+        fontSize:30, 
         fontWeight:'bold' ,
-        textAlign:'center'
+        textAlign:'center',
+        borderColor:'white',
+        borderWidth:2
+     
        
     },
     description:{
        
-        color:'#58E80B',
-        paddingHorizontal:20,
+        color:'white',
+        paddingHorizontal:10,
+        paddingVertical:30,
         fontSize:20, 
-        fontWeight:'bold' 
+        fontWeight:'bold',
+        borderColor:'white',
+        borderWidth:2,
+        marginTop:20
     }
   });
