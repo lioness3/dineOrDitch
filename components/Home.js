@@ -13,9 +13,9 @@ export default function Home({navigation}) {
 
 
       <View style={styles.container}>
-        <Text style={styles.header}>I have some ideas in store for you...</Text>
+  
         <View style={styles.card}>
-        
+      
           <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           navigation.navigate('Restaurants')
           }>
@@ -24,11 +24,11 @@ export default function Home({navigation}) {
             </Text>
           </TouchableHighlight>
           <Text style={styles.instructions}>
-            Hungry now but don't know what to eat? Select 'Restaurant' for a randomly generated restaurant in your area. {'\n'} *note: this action requires you to share your location
+             Select 'Restaurant' for a randomly generated restaurant in your area. {'\n'} *note: this action requires you to share your location
           </Text>
         </View>
         <View style={styles.card}>
-         
+    
           <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           navigation.navigate('Cuisines')
           }>
@@ -42,8 +42,8 @@ export default function Home({navigation}) {
         </View>
        
         <View style={styles.card}>
-          
-          <TouchableHighlight  style={{}}underlayColor='blue'activeOpacity={.8} onPress={() =>
+   
+          <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           navigation.navigate('Dates')
           }>
             <Text style={styles.button }>
@@ -60,51 +60,43 @@ export default function Home({navigation}) {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 5,
+    flex:1,
     backgroundColor: 'black',
     alignItems: 'center',
     textAlign:'center',
-    
+    justifyContent:'space-evenly',
+    paddingHorizontal:20,
+    paddingBottom:50
   },
-  header:{
+
+  button:{
+
    
     color:'white',
-    padding:10
-  },
-  button:{
-  
-    borderColor:'black',
-    borderWidth:5,
-    color:'white',
      backgroundColor:'#354047',
-    textShadowColor:'yellow',
-    textShadowRadius:2,
+    textShadowColor:'#95FCF7',
+    textShadowRadius:60,
     paddingHorizontal:10,
-    paddingVertical:50,
+    paddingVertical:30,
     fontSize:50,
     fontWeight:'bold',
     textAlign:'center'
   },
   card:{
-    flex:.5,
+    
   
     width:350,
 
-
-    paddingBottom:30,
-    shadowColor:'#BBE2FB',
-  shadowOpacity:0.5,
-    shadowRadius:30,
-   
     marginVertical:10
   },
   instructions:{
-    flex:1,
+ 
     color:'white',
     backgroundColor:'black',
     fontSize:10,
     fontWeight:'bold',
-    padding:5,
+   paddingVertical:10,
+   
     textAlign:'center',
     
   }

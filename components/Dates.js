@@ -22,7 +22,7 @@ const generateDate = ()=>{
     
      setDate({ title: titleIdea, description: descriptionIdea})
 
-     setColor('red')
+
     }
 if(date.title){
     return(
@@ -39,7 +39,7 @@ if(date.title){
         <View style={styles.container}>
         <Text style={styles.header}>For the times when it's difficult to come up with something fun to do.</Text>
         <Button title='Date Idea' onPress={()=>generateDate()} color='blue'/>
-        <Text style={styles.instructions}> Press 'Date Idea' for a randomly generated date suggestion!</Text>
+        <Text style={styles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
         
     </View>
     )
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         alignItems: 'center',
         paddingTop:20,
-        borderColor:'#58E80B',
-        borderWidth:30,
+        textAlign:'center'
+     
      
     },
     header:{
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:10
     },
     instructions:{
+        flex:.5,
         color:'white',
         margin:10,
         fontSize:10, 

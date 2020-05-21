@@ -28,7 +28,7 @@ export default function App({navigation}) {
           <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: 'Feeling Indesicive?' , headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
+          options={{ title: 'Feeling Indecisive?' , headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
       
          
         />
@@ -40,11 +40,11 @@ export default function App({navigation}) {
           <Stack.Screen
           name="Cuisines"
           component={Cuisines}
-          options={{ title: 'Cuisine Ideas', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
+          options={{ title: 'Cuisine Generator', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }}
         />
         <Stack.Screen name="Dates" 
         component={Dates}
-         options={{title: 'Date Ideas', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }} />
+         options={{title: 'Date Generator', headerStyle: { backgroundColor: 'black' }, headerTintColor:'#fff' }} />
       </Stack.Navigator>
       
         {/* <Tab.Navigator tabBarOptions={{activeTintColor: 'tomato',
