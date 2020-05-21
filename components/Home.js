@@ -43,7 +43,7 @@ export default function Home({navigation}) {
        
         <View style={styles.card}>
           
-          <TouchableHighlight  underlayColor='blue'activeOpacity={.8} onPress={() =>
+          <TouchableHighlight  style={{}}underlayColor='blue'activeOpacity={.8} onPress={() =>
           navigation.navigate('Dates')
           }>
             <Text style={styles.button }>
@@ -76,16 +76,17 @@ const styles = StyleSheet.create({
     borderColor:'black',
     borderWidth:5,
     color:'white',
-     backgroundColor:'#404146',
-     borderRadius:10,
+     backgroundColor:'#354047',
+    textShadowColor:'yellow',
+    textShadowRadius:2,
     paddingHorizontal:10,
-    paddingVertical:100,
+    paddingVertical:50,
     fontSize:50,
     fontWeight:'bold',
     textAlign:'center'
   },
   card:{
-    flex:1.5,
+    flex:.5,
   
     width:350,
 
@@ -94,16 +95,17 @@ const styles = StyleSheet.create({
     shadowColor:'#BBE2FB',
   shadowOpacity:0.5,
     shadowRadius:30,
-    borderRadius:5,
+   
     marginVertical:10
   },
   instructions:{
-    flex:0.3,
+    flex:1,
     color:'white',
     backgroundColor:'black',
     fontSize:10,
     fontWeight:'bold',
     padding:5,
-    textAlign:'center'
+    textAlign:'center',
+    
   }
 });

@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button,ActivityIndicator, Link } from 'react-native';
+import { StyleSheet, Text,Alert, View, Button,ActivityIndicator, Link } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import Dates from './Dates';
@@ -23,16 +23,56 @@ const [typeOfCuisine,setTypeOfCuisine] = useState('')
 const [addressLink,setAddressLink]= useState('')
 const [cuisine, setCuisine]= useState(null)
 
- navigator.geolocation.getCurrentPosition((position) =>  {
-      let latitude =  position.coords.latitude
-     let longitude =  position.coords.longitude
-    setLat(latitude),
-    setLng(longitude)
+
+const openSettings = ()=>{
+  Linking.openSettings()
+}
+
+  const handleLocationPermission = async ()=>{
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+  
+    if (status !== "granted") {
+      Alert.alert(
+        "Location Unavailable",
+        "Your location is needed to find a restaurant close to you",
+        [
+          {
+            text: "Cancel",
+            onPress: () => navigation.navigate('Home'),
+            style: "cancel"
+          },
+          { text: "Open Settings", onPress: () => openSettings() }
+        ],
+        { cancelable: false }
+      );
+      
+ 
+      
+    }else if(!located){
      
-    if(lng){
-      setLocated(true)  
+      const position = await Location.getCurrentPositionAsync()
+    
+      let lat =  position.coords.latitude
+      let lng = position.coords.longitude
+      setLat(lat),
+      setLng(lng),
+      setLocated(true)
+      console.log(lat,lng);
+     
+      
     }
-  })
+}
+
+//  const getLocation =  navigator.geolocation.getCurrentPosition((position) =>  {
+//  
+//  
+   
+//   if(lng){
+//     setLocated(true)  
+//   }
+// })
+// }
+
    
     
   
@@ -40,7 +80,10 @@ const [cuisine, setCuisine]= useState(null)
 
 
  async function  generateRestaurant() {
-  setRandomNumber(Math.floor(Math.random() * 20))
+   if(!lat){
+     handleLocationPermission()
+   }else{
+    setRandomNumber(Math.floor(Math.random() * 20))
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
@@ -68,6 +111,8 @@ const [cuisine, setCuisine]= useState(null)
      })
     
   }
+   }
+  
   useEffect( ()=>{
 
     generateRestaurant()
@@ -90,8 +135,9 @@ if(loading){
     <View style={styles.container}>
       
       <View style={styles.card}>
+      <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.type}>{typeOfCuisine}</Text>
+        
         <Text style={styles.info}>{address}</Text>
       </View>
       <View style={styles.buttons}>
@@ -126,18 +172,24 @@ const styles = StyleSheet.create({
    
   },
   card: {
-  
+  flex:.5,
     backgroundColor: 'white',
     padding: 20,
     borderRadius:10,
+    shadowColor:'#BBE2FB',
+    shadowRadius:30,
+    shadowOpacity:0.5,
+    
   },
   name:{
-    fontSize: 40,
+    
+    fontSize: 30,
     borderBottomColor:'green',
-    borderBottomWidth:3
+    borderBottomWidth:3,
+    textAlign:'center'
   },
   info:{
-    fontSize: 20
+    fontSize: 15
   },
   type:{
     fontSize: 10,
