@@ -4,7 +4,8 @@ import CuisineIdeas from './CuisineIdeas'
 import axios from 'axios';
 import * as Linking from 'expo-linking';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-
+import DitchButton from './DitchButton'
+import DineButton from './DineButton'
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
 
@@ -17,20 +18,28 @@ const  generateCuisine = ()=>{
    setCuisine(idea)
 
   }
+  const openGoogle = (cuisine)=>{
+  
+    Linking.openURL('https://www.google.com/search?q='+`${cuisine}`+'%20recipe')
+  }
 
 if(cuisine){
 
   return(
     <View style={styles.container}>
+     
       <Text style={styles.idea}>{cuisine}</Text>
       <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
-              <Text style={styles.ditchButton }>
-                 Ditch 
-              </Text>
-          </TouchableHighlight>
-      <Text style={styles.instructions}>Press 'Ditch' for another cuisine suggestion.</Text>
+          <DitchButton/>
+      </TouchableHighlight>
+      <TouchableHighlight underlayColor='green'activeOpacity={.8} onPress={() =>
+      openGoogle(cuisine)
+      }>
+      <DineButton title='Recipe'/>
+      </TouchableHighlight>
+      <Text style={styles.instructions}>Press 'Ditch' for another cuisine suggestion.{'\n'} or {'\n'}Press 'Recipe' for {cuisine} recipe suggestions.</Text>
     </View>
     );
 }else{
@@ -74,6 +83,11 @@ const styles = StyleSheet.create({
       color:'red',
       fontSize:30
   },
+  recipieButton:{
+     
+    color:'green',
+    fontSize:30
+},
     instructions:{
 
         color:'white',

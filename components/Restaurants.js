@@ -77,11 +77,11 @@ const openSettings = ()=>{
          'user-key': 'a31bd76da32396a27b6906bf0ca707a2'
        },
        params: {
-         'lat':`${lat}`,
-         'lon': `${lng}`,
+        //  'lat':`${lat}`,
+        //  'lon': `${lng}`,
  
-         // 'lat': '45.5047512',
-         // 'lon': '-122.8462298',
+         'lat': '45.5047512',
+         'lon': '-122.8462298',
          'radius':'8000',
          'sort': 'real_distance'
        }

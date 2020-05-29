@@ -13,7 +13,7 @@ export default function Home({navigation}) {
 
 
       <View style={styles.container}>
-  
+
         <View style={styles.card}>
       
           <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     textShadowColor:'#95FCF7',
     textShadowRadius:60,
     paddingHorizontal:10,
-    paddingVertical:30,
+    paddingVertical:20,
+    marginHorizontal:10,
     fontSize:50,
     fontWeight:'bold',
     textAlign:'center'
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     marginVertical:10
   },
   instructions:{
-    color:'white',
+    color:'grey',
     backgroundColor:'black',
     fontSize:15,
     paddingVertical:10,
