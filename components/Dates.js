@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Location from 'expo-location';
 import { createStackNavigator } from '@react-navigation/stack';
-import DateIdeas from './DateIdeas'
-
+import DateIdeas from './DateIdeas';
+import CustomStyles from './Styles';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import CustomButton from './CustomButton';
 
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
@@ -27,32 +28,28 @@ const generateDate = ()=>{
     }
 if(date.title){
     return(
-        <View style={styles.container}>
+        <View style={CustomStyles.container}>
            
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
-            <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
+            <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
           generateDate()
           }>
-              <Text style={styles.ditchButton }>
-                 Ditch
-              </Text>
+            <CustomButton title='Ditch' color='red'/>
           </TouchableHighlight>
-            <Text style={styles.instructions}>Press 'Ditch' for another date suggestion.</Text>
+            <Text style={CustomStyles.instructions}>Press 'Ditch' for another date suggestion.</Text>
         </View>
         );
 }else{
     return(
-        <View style={styles.container}>
+        <View style={CustomStyles.container}>
         <Text style={styles.header}>For the times when it's difficult to come up with something fun to do.</Text>
         <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           generateDate()
           }>
-              <Text style={styles.button }>
-                 Date Idea
-              </Text>
+            <CustomButton title='Date Idea' color='blue' />
           </TouchableHighlight>
-        <Text style={styles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
+        <Text style={CustomStyles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
         
     </View>
     )
@@ -61,15 +58,7 @@ if(date.title){
 
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'black',
-        alignItems: 'center',
-        paddingTop:20,
-        textAlign:'center'
-     
-     
-    },
+ 
     header:{
         color:'white',
         margin:10,
@@ -78,15 +67,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold' ,
         paddingHorizontal:10
     },
-    instructions:{
-        flex:.5,
-        color:'white',
-        margin:10,
-        fontSize:20, 
-        textAlign:'center',
-        fontWeight:'bold',
-        paddingHorizontal:30
-    },
+ 
     title:{
      
         color:'white',
@@ -102,24 +83,13 @@ const styles = StyleSheet.create({
     description:{
        
         color:'white',
-        paddingHorizontal:10,
+        paddingHorizontal:20,
         paddingVertical:30,
         fontSize:20, 
-        fontWeight:'bold',
-        borderColor:'white',
-        borderWidth:2,
+        borderTopColor:'white',
+        borderTopWidth:2,
         margin:20,
-        backgroundColor:'#869EAE'
+  
     },
-    button:{
-       
-        color:'#0E9EF9',
-        fontSize:30,
-       
-    },
-    ditchButton:{
-       
-        color:'red',
-        fontSize:30
-    }
+ 
   });

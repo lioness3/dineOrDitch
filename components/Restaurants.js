@@ -5,8 +5,8 @@ import * as Location from 'expo-location';
 import axios from 'axios';
 import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
-import DitchButton from './DitchButton';
-import DineButton from './DineButton';
+import CustomStyles from './Styles';
+import CustomButton from './CustomButton';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
@@ -118,7 +118,7 @@ if(loading){
     )
   }else if(restaurant) {
   return (
-    <View style={styles.container}>
+    <View style={CustomStyles.container}>
       
       <View style={styles.card}>
         <Text style={styles.type}>{typeOfCuisine}</Text>
@@ -127,27 +127,27 @@ if(loading){
       </View>
     
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
-        <DineButton title='Dine'/>
+        <CustomButton title='Dine' color='#58E80B'/>
        </TouchableHighlight>
 
       <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
-        <DitchButton/>
+      <CustomButton title='Ditch' color='red'/>
       </TouchableHighlight>
    
-      <Text style={styles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
+      <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
   )
  }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
-   paddingHorizontal:30,
+  // container: {
+  //   flex: 2,
+  //   backgroundColor: 'black',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //  paddingHorizontal:30,
     
-  },
+  // },
   instructions:{
     color:'white',
    padding:30,

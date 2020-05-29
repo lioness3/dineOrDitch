@@ -4,8 +4,7 @@ import CuisineIdeas from './CuisineIdeas'
 import axios from 'axios';
 import * as Linking from 'expo-linking';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import DitchButton from './DitchButton'
-import DineButton from './DineButton'
+import CustomButton from './CustomButton';
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
 
@@ -32,12 +31,12 @@ if(cuisine){
       <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
-          <DitchButton/>
+        <CustomButton title='Ditch' color='red'/>
       </TouchableHighlight>
       <TouchableHighlight underlayColor='#58E80B' activeOpacity={.8} onPress={() =>
       openGoogle(cuisine)
       }>
-      <DineButton title='Recipe'/>
+      <CustomButton title='Recipe' color='#58E80B'/>
       </TouchableHighlight>
       <Text style={styles.instructions}>Press 'Ditch' for another cuisine suggestion.{'\n'} or {'\n'}Press 'Recipe' for {cuisine} recipe suggestions.</Text>
     </View>

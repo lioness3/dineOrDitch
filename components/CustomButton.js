@@ -3,9 +3,10 @@ import { StyleSheet, Text, View} from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
 
 
-export default function DineButton(props) {
+export default function CustomButton(props) {
+
     return(
-    <Text style={styles.button}>
+    <Text style={[{color:`${props.color}`, backgroundColor: props.backgroundColor ? `${props.color}` : 'black' }, styles.button]}>
        {props.title}
     </Text>
     )
@@ -13,12 +14,11 @@ export default function DineButton(props) {
 const styles = StyleSheet.create({
 
   button:{
-    margin:20,
-    padding:20,
-    color:'#58E80B',
+   
+    padding:10,
     fontSize:30,
     textAlign:'center',
-     backgroundColor:'grey',
+    
      borderColor:'white',
      borderWidth:1,
      width:200,
