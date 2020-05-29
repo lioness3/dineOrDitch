@@ -28,7 +28,7 @@ if(cuisine){
     <View style={styles.container}>
      
       <Text style={styles.idea}>{cuisine}</Text>
-      <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
+      <TouchableHighlight underlayColor='red' activeOpacity={.2} onPress={() =>
           generateCuisine()
           }>
         <CustomButton title='Ditch' color='red'/>

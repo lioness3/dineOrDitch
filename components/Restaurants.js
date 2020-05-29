@@ -111,7 +111,7 @@ const openMap = (restaurant)=>{
 
 if(loading){
   return(
-    <View style={styles.container}>
+    <View style={CustomStyles.container}>
       <Text style={styles.instructions}>Thinking...</Text>
       <ActivityIndicator size='large' color='#95FCF7'/> 
     </View>
@@ -120,12 +120,12 @@ if(loading){
   return (
     <View style={CustomStyles.container}>
       
-      <View style={styles.card}>
+      <View style={CustomStyles.card}>
         <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.info}>{address}</Text>
       </View>
-    
+    <View style={CustomStyles.buttonContainer}>
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
         <CustomButton title='Dine' color='#58E80B'/>
        </TouchableHighlight>
@@ -133,52 +133,14 @@ if(loading){
       <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
       <CustomButton title='Ditch' color='red'/>
       </TouchableHighlight>
-   
+      </View>
       <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
   )
  }
 }
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 2,
-  //   backgroundColor: 'black',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //  paddingHorizontal:30,
-    
-  // },
-  instructions:{
-    color:'white',
-   padding:30,
-   textAlign:'center',
-   fontWeight:'bold'
-  },
-  button:{
-   marginTop :20,
-    color:'#13AF50',
-    fontSize:30,
-   
-},
-ditchButton:{
   
-    color:'red',
-    fontSize:30
-},
-  card: {
-
-    
-    padding: 20,
-    borderRadius:10,
-    backgroundColor:'#354047',
-    // textShadowColor:'#95FCF7',
-    // textShadowRadius:60,
-    shadowColor:'#BBE2FB',
-    shadowRadius:3,
-    shadowOpacity:0.5,
-
-    
-  },
   name:{
     marginVertical:30,
     fontSize: 30,

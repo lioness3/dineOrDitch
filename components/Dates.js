@@ -29,9 +29,10 @@ const generateDate = ()=>{
 if(date.title){
     return(
         <View style={CustomStyles.container}>
-           
+      <View style={CustomStyles.card}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
+            </View>
             <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
           generateDate()
           }>
@@ -74,21 +75,17 @@ const styles = StyleSheet.create({
         padding:10,
         fontSize:30, 
         fontWeight:'bold' ,
-        textAlign:'center',
-        // borderColor:'white',
-        // borderWidth:2
+       
+
      
        
     },
     description:{
-       
+
         color:'white',
-        paddingHorizontal:20,
-        paddingVertical:30,
         fontSize:20, 
-        borderTopColor:'white',
-        borderTopWidth:2,
-        margin:20,
+   
+
   
     },
  
