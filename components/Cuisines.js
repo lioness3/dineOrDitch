@@ -20,7 +20,7 @@ const  generateCuisine = ()=>{
   }
   const openGoogle = (cuisine)=>{
   
-    Linking.openURL('https://www.google.com/search?q='+`${cuisine}`+'%20recipe')
+    Linking.openURL('https://www.google.com/search?q='+`${cuisine}`+'+recipe')
   }
 
 if(cuisine){
@@ -29,12 +29,12 @@ if(cuisine){
     <View style={styles.container}>
      
       <Text style={styles.idea}>{cuisine}</Text>
-      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() =>
+      <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
           <DitchButton/>
       </TouchableHighlight>
-      <TouchableHighlight underlayColor='green'activeOpacity={.8} onPress={() =>
+      <TouchableHighlight underlayColor='#58E80B' activeOpacity={.8} onPress={() =>
       openGoogle(cuisine)
       }>
       <DineButton title='Recipe'/>

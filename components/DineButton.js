@@ -13,12 +13,17 @@ export default function DineButton(props) {
 const styles = StyleSheet.create({
 
   button:{
+    margin:20,
+    padding:20,
+    color:'#58E80B',
+    fontSize:30,
+    textAlign:'center',
      backgroundColor:'grey',
      borderColor:'white',
      borderWidth:1,
      width:200,
-    color:'green',
+   
     fontWeight:'bold',
-    fontSize:30
+  
   },
 })

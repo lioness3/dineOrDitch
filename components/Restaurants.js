@@ -1,15 +1,12 @@
 
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text,Alert, View, Button,ActivityIndicator, Link } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, Text,Alert, View,ActivityIndicator} from 'react-native';
 import * as Location from 'expo-location';
-import Dates from './Dates';
-import Cuisines from './Cuisines';
-import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
 import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
-import { Logs } from 'expo';
+import DitchButton from './DitchButton';
+import DineButton from './DineButton';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
@@ -77,11 +74,8 @@ const openSettings = ()=>{
          'user-key': 'a31bd76da32396a27b6906bf0ca707a2'
        },
        params: {
-        //  'lat':`${lat}`,
-        //  'lon': `${lng}`,
- 
-         'lat': '45.5047512',
-         'lon': '-122.8462298',
+         'lat':`${lat}`,
+         'lon': `${lng}`,
          'radius':'8000',
          'sort': 'real_distance'
        }
@@ -127,25 +121,18 @@ if(loading){
     <View style={styles.container}>
       
       <View style={styles.card}>
-      <Text style={styles.type}>{typeOfCuisine}</Text>
+        <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.name}>{restaurant} </Text>
-        
         <Text style={styles.info}>{address}</Text>
       </View>
     
-      <TouchableHighlight underlayColor='green'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
-              <Text style={styles.button }>
-                 Dine 
-              </Text>
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
-              <Text style={styles.ditchButton }>
-                 Ditch
-              </Text>
-          </TouchableHighlight>
-          
-        {/* <Button color='green' title='Dine' onPress={()=>{openMap(restaurant)}}/>
-        <Button color='red' title='Ditch' onPress={() => {setLoading(true), generateRestaurant()}}/> */}
+      <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
+        <DineButton title='Dine'/>
+       </TouchableHighlight>
+
+      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
+        <DitchButton/>
+      </TouchableHighlight>
    
       <Text style={styles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
