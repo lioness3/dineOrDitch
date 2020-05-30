@@ -3,13 +3,14 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import CustomStyles from './Styles'
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import Slogan from './Slogan';
 
 export default function Home({navigation}) {
     return(
 
 
       <View style={CustomStyles.container}>
-
+        <Slogan description='decisions'/>
         <View style={[{height:100},CustomStyles.card]}>
       
           <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>

@@ -47,7 +47,7 @@ if(cuisine){
 }else{
   return(
     <View style={CustomStyles.container}>
-
+<Slogan categorie='meals'/>
       <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>

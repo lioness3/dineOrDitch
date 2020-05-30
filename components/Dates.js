@@ -5,7 +5,7 @@ import DateIdeas from './DateIdeas';
 import CustomStyles from './Styles';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import CustomButton from './CustomButton';
-
+import Slogan from './Slogan';
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
 const [instructions, setInstructions] = useState("Sometimes it's difficult to come up with ideas." +`${'\n'}` +"I'm here to help!"+`${'\n'}` +"Press the button below for a randomly generate date idea!")
@@ -27,15 +27,22 @@ const generateDate = ()=>{
 if(date.title){
     return(
         <View style={CustomStyles.container}>
+          <Slogan categorie='date night'/>
       <View style={[{height:300},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
             </View>
+    
             <TouchableHighlight underlayColor='red' activeOpacity={.3} onPress={() =>
           generateDate()
           }>
+                    <View style={{shadowColor:'yellow',
+        shadowRadius:30,
+        shadowOpacity:0.5,}}>
             <CustomButton title='Ditch' color='red'/>
+            </View>
           </TouchableHighlight>
+        
             <Text style={CustomStyles.instructions}>Press 'Ditch' for another date suggestion.</Text>
         </View>
         );

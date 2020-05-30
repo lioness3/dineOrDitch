@@ -6,7 +6,7 @@ import { useLinkProps } from '@react-navigation/native';
 export default function CustomButton(props) {
 
     return(
-    <Text style={[{color:`${props.color}`}, styles.button]}>
+    <Text style={[{color:`${props.color}`, borderColor:`${props.color}`,}, styles.button]}>
        {props.title}
     </Text>
     )
@@ -14,18 +14,13 @@ export default function CustomButton(props) {
 const styles = StyleSheet.create({
 
   button:{
-  
-    padding:20,
-  
+    padding:10,
     fontSize:30,
     textAlign:'center',
     letterSpacing:2,
-     borderColor:'white',
      borderWidth:1,
-   
-
-   
     fontWeight:'bold',
+    margin:1,
   
   },
 })

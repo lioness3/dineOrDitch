@@ -83,10 +83,11 @@ const openSettings = ()=>{
        }
      }).then(res => {
        let restaurant = res.data.restaurants[randomNumber].restaurant.name
-       let address = res.data.restaurants[randomNumber].restaurant.location.address
+       let address = res.data.restaurants[randomNumber].restaurant.location.locality
        let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
      setRestaurant(restaurant),
-       setAddress(address),
+      setAddress(address),
+       
        setTypeOfCuisine(typeOfCuisine),
        setLoading(false)
       console.log(randomNumber,restaurant);
@@ -122,11 +123,12 @@ if(loading){
   }else if(restaurant) {
   return (
     <View style={CustomStyles.container}>
-      <Slogan categorie='restaurant' />
+      <Slogan categorie='restaurant choices' />
       <View style={CustomStyles.card}>
-        <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.info}>{address}</Text>
+        <Text style={styles.type}>{typeOfCuisine}</Text>
+        
       </View>
 
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
@@ -152,17 +154,22 @@ const styles = StyleSheet.create({
   },
   name:{
     marginVertical:30,
-    fontSize: 30,
+    fontSize: 50,
     color:'white',
+    textShadowColor:'#97CFF2',
+    textShadowRadius:70,
+
     textAlign:'center',
     fontWeight:'bold'
   },
   info:{
-    fontSize: 15,
+    color:'white',
+    fontSize: 20,
     fontWeight:'bold'
   },
   type:{
-    fontSize: 10,
+    color:'white',
+    fontSize: 15,
     fontWeight:'bold'
   }
 });
