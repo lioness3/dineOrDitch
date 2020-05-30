@@ -6,7 +6,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function Slogan(props) {
     return(
-<Text style={CustomStyles.instructions}>Dine or Ditch making {props.categorie} plans easier</Text>
+<Text style={CustomStyles.instructions}>Dine or Ditch  {'\n'} making {props.categorie} plans easier</Text>
 
 
     )

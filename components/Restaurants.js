@@ -8,6 +8,7 @@ import * as Permissions from 'expo-permissions';
 import CustomStyles from './Styles';
 import CustomButton from './CustomButton';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import Slogan from './Slogan'
 export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
@@ -121,7 +122,7 @@ if(loading){
   }else if(restaurant) {
   return (
     <View style={CustomStyles.container}>
-      
+      <Slogan categorie='restaurant' />
       <View style={CustomStyles.card}>
         <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.name}>{restaurant} </Text>

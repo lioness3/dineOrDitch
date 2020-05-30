@@ -2,12 +2,12 @@
  import { StyleSheet} from 'react-native';
  const CustomStyles = StyleSheet.create({
     container: {
-        flex: 4,
+        flex: 5,
         backgroundColor: 'black',
         textAlign:'center',
-        justifyContent:'space-between',
+        justifyContent:'space-evenly',
         alignContent:'flex-end',
-        paddingVertical:80,
+        paddingVertical:40,
         paddingHorizontal:30
 
     },
