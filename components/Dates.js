@@ -27,11 +27,11 @@ const generateDate = ()=>{
 if(date.title){
     return(
         <View style={CustomStyles.container}>
-      <View style={CustomStyles.card}>
+      <View style={[{height:300},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
             </View>
-            <TouchableHighlight underlayColor='red' activeOpacity={.8} onPress={() =>
+            <TouchableHighlight underlayColor='red' activeOpacity={.3} onPress={() =>
           generateDate()
           }>
             <CustomButton title='Ditch' color='red'/>
@@ -45,10 +45,10 @@ if(date.title){
   
         <View style={CustomStyles.container}>
        
-        <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
+        <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.3} onPress={() =>
           generateDate()
           }>
-            <CustomButton title='Date Idea' color='blue' />
+            <CustomButton title='Date Idea' color='#0E9EF9' />
           </TouchableHighlight>
         <Text style={CustomStyles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
         </View>  
@@ -60,19 +60,14 @@ if(date.title){
 }
 const styles = StyleSheet.create({
  
-    header:{
-        color:'white',
-      
-        fontSize:20, 
-        textAlign:'center',
-        fontWeight:'bold' ,
-  
-    },
+ 
  
     title:{
      
         color:'white',
-        padding:10,
+        textDecorationLine:'underline',
+        textAlign:'center',
+         paddingBottom:30,
         fontSize:30, 
         fontWeight:'bold' ,
        
@@ -81,7 +76,7 @@ const styles = StyleSheet.create({
        
     },
     description:{
-
+        paddingHorizontal:10,
         color:'white',
         fontSize:20, 
    

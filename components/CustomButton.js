@@ -14,15 +14,16 @@ export default function CustomButton(props) {
 const styles = StyleSheet.create({
 
   button:{
-   
-    paddingVertical:10,
+  
+    padding:20,
   
     fontSize:30,
     textAlign:'center',
-    
+    letterSpacing:2,
      borderColor:'white',
      borderWidth:1,
- 
+   
+
    
     fontWeight:'bold',
   

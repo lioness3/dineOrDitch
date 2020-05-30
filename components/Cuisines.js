@@ -5,6 +5,7 @@ import CustomStyles from './Styles'
 import * as Linking from 'expo-linking';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import CustomButton from './CustomButton';
+import Slogan from './Slogan'
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
 
@@ -26,7 +27,8 @@ if(cuisine){
 
   return(
     <View style={CustomStyles.container}>
-     <View style={CustomStyles.card}>
+   <Slogan categorie='meals'/>
+     <View style={[{height:200},CustomStyles.card]}>
       <Text style={styles.idea}>{cuisine}</Text>
       </View>
       <TouchableHighlight underlayColor='red' activeOpacity={.2} onPress={() =>
@@ -46,7 +48,7 @@ if(cuisine){
   return(
     <View style={CustomStyles.container}>
 
-      <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
+      <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
            <CustomButton title='Cuisine' color='#0E9EF9'/>
@@ -65,8 +67,7 @@ const styles = StyleSheet.create({
     idea:{
         textAlign:'center',
         color:'white',
-        padding:40,
-        textDecorationColor:'white',
+  paddingVertical:40,
         textShadowColor:'#0E9EF9',
         textShadowRadius:100,
         fontSize:50, 

@@ -5,14 +5,15 @@
         flex: 4,
         backgroundColor: 'black',
         textAlign:'center',
-        justifyContent:'space-evenly',
-        paddingVertical:100,
+        justifyContent:'space-between',
+        alignContent:'flex-end',
+        paddingVertical:80,
         paddingHorizontal:30
 
     },
 
     card: {
-
+       
         padding: 20,
         borderRadius:10,
         borderWidth:2,
@@ -25,7 +26,7 @@
  
       },
     instructions:{
-      
+     
         color:'grey',
         fontSize:20, 
         textAlign:'center',
