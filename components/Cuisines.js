@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import CuisineIdeas from './CuisineIdeas'
-import axios from 'axios';
+import CustomStyles from './Styles'
 import * as Linking from 'expo-linking';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import CustomButton from './CustomButton';
@@ -25,9 +25,10 @@ const  generateCuisine = ()=>{
 if(cuisine){
 
   return(
-    <View style={styles.container}>
-     
+    <View style={CustomStyles.container}>
+     <View style={CustomStyles.card}>
       <Text style={styles.idea}>{cuisine}</Text>
+      </View>
       <TouchableHighlight underlayColor='red' activeOpacity={.2} onPress={() =>
           generateCuisine()
           }>
@@ -96,9 +97,10 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     idea:{
-        flex:2,
+
         color:'#58E80B',
-       marginTop:200,
+        textShadowColor:'#95FCF7',
+        textShadowRadius:1,
         fontSize:50, 
         fontWeight:'bold',
       

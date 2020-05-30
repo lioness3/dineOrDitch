@@ -2,32 +2,32 @@
  import { StyleSheet} from 'react-native';
  const CustomStyles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 4,
         backgroundColor: 'black',
-        alignItems: 'stretch',
-        paddingBottom:100,
+    
+        paddingVertical:100,
         textAlign:'center',
         justifyContent:'flex-end',
         paddingHorizontal:30
     },
     buttonContainer:{
-       flex:.3,
+       flex:1,
+       alignItems: 'stretch',
        justifyContent:'space-around'
     },
     card: {
-        flex:0.5,
+        flex:1,
         padding: 20,
         borderRadius:10,
         backgroundColor:'#354047',
-        // textShadowColor:'#95FCF7',
-        // textShadowRadius:60,
+      
         shadowColor:'#BBE2FB',
         shadowRadius:3,
         shadowOpacity:0.5,
-        marginBottom:50
+ 
       },
     instructions:{
-
+        flex:1,
         color:'grey',
         fontSize:20, 
         textAlign:'center',
