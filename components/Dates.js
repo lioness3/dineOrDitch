@@ -41,16 +41,18 @@ if(date.title){
         );
 }else{
     return(
+  
+  
         <View style={CustomStyles.container}>
-        <Text style={styles.header}>For the times when it's difficult to come up with something fun to do.</Text>
+       
         <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           generateDate()
           }>
             <CustomButton title='Date Idea' color='blue' />
           </TouchableHighlight>
         <Text style={CustomStyles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
-        
-    </View>
+        </View>  
+
     )
 
 }
@@ -60,11 +62,11 @@ const styles = StyleSheet.create({
  
     header:{
         color:'white',
-        margin:10,
-        fontSize:15, 
+      
+        fontSize:20, 
         textAlign:'center',
         fontWeight:'bold' ,
-        paddingHorizontal:10
+  
     },
  
     title:{

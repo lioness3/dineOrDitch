@@ -39,21 +39,19 @@ if(cuisine){
       }>
       <CustomButton title='Recipe' color='#58E80B'/>
       </TouchableHighlight>
-      <Text style={styles.instructions}>Press 'Ditch' for another cuisine suggestion.{'\n'} or {'\n'}Press 'Recipe' for {cuisine} recipe suggestions.</Text>
+      <Text style={CustomStyles.instructions}>Press 'Ditch' for another cuisine suggestion.{'\n'} or {'\n'}Press 'Recipe' for {cuisine} recipe suggestions.</Text>
     </View>
     );
 }else{
   return(
-    <View style={styles.container}>
-      <Text style={styles.idea}>{cuisine}</Text>
+    <View style={CustomStyles.container}>
+
       <TouchableHighlight underlayColor='blue'activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
-              <Text style={styles.button }>
-                 Cuisine 
-              </Text>
+           <CustomButton title='Cuisine' color='#0E9EF9'/>
           </TouchableHighlight>
-      <Text style={styles.instructions}>Press 'Cuisine' for a randomly generated cuisine idea</Text>
+      <Text style={CustomStyles.instructions}>Press 'Cuisine' for a randomly generated cuisine idea</Text>
     </View>
     );
 }
@@ -63,44 +61,14 @@ if(cuisine){
 
 }
 const styles = StyleSheet.create({
-    container: {
-      flex: 3,
-      backgroundColor: 'black',
-      alignItems: 'center',
-     paddingVertical:100,
-     textAlign:'center',
-     paddingHorizontal:30,
- 
-    },
-    button:{
-       
-      color:'#0E9EF9',
-      fontSize:30,
-     
-  },
-  ditchButton:{
-     
-      color:'red',
-      fontSize:30
-  },
-  recipieButton:{
-     
-    color:'green',
-    fontSize:30
-},
-    instructions:{
 
-        color:'white',
-        margin:30,
-        fontSize:15, 
-        textAlign:'center',
-        fontWeight:'bold'
-    },
     idea:{
-
-        color:'#58E80B',
-        textShadowColor:'#95FCF7',
-        textShadowRadius:1,
+        textAlign:'center',
+        color:'white',
+        padding:40,
+        textDecorationColor:'white',
+        textShadowColor:'#0E9EF9',
+        textShadowRadius:100,
         fontSize:50, 
         fontWeight:'bold',
       

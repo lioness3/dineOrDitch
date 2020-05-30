@@ -46,8 +46,9 @@ const openSettings = ()=>{
  
       
     }else if(!located){
-     
+      console.log('locating');
       const position = await Location.getCurrentPositionAsync()
+    console.log('located');
     
       let lat =  position.coords.latitude
       let lng = position.coords.longitude
@@ -112,8 +113,9 @@ const openMap = (restaurant)=>{
 if(loading){
   return(
     <View style={CustomStyles.container}>
-      <Text style={styles.instructions}>Thinking...</Text>
+      
       <ActivityIndicator size='large' color='#95FCF7'/> 
+      <Text style={styles.loading}>Thinking...</Text>
     </View>
     )
   }else if(restaurant) {
@@ -125,7 +127,7 @@ if(loading){
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.info}>{address}</Text>
       </View>
-    <View style={CustomStyles.buttonContainer}>
+
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
         <CustomButton title='Dine' color='#58E80B'/>
        </TouchableHighlight>
@@ -133,14 +135,20 @@ if(loading){
       <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
       <CustomButton title='Ditch' color='red'/>
       </TouchableHighlight>
-      </View>
+  
       <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
     </View>
   )
  }
 }
 const styles = StyleSheet.create({
-  
+  loading:{
+    marginVertical:100,
+    textAlign:'center',
+    color:'white',
+    fontSize: 30,
+    fontWeight:'bold'
+  },
   name:{
     marginVertical:30,
     fontSize: 30,
