@@ -10,7 +10,7 @@ export default function Home({navigation}) {
 
 
       <View style={CustomStyles.container}>
-        <Slogan description='decisions'/>
+        <Slogan categorie='decisions'/>
         <View style={[{height:100},CustomStyles.card]}>
       
           <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
