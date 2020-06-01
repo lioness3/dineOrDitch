@@ -11,12 +11,12 @@ export default function Home({navigation}) {
 
       <View style={CustomStyles.container}>
         <Slogan categorie='decisions'/>
-        <View style={[{height:100},CustomStyles.card]}>
+        <View style={[{height:100,backgroundColor:'#354047'},CustomStyles.card]}>
       
-          <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
+          <TouchableHighlight underlayColor='#6BEE6B'activeOpacity={.8} onPress={() =>
           navigation.navigate('Restaurants')
           }>
-            <Text style={styles.button}>
+            <Text style={[{color:'#6BEE6B'},styles.button ]}>
                 Restaurant 
             </Text>
           </TouchableHighlight>
@@ -25,12 +25,12 @@ export default function Home({navigation}) {
         <Text style={CustomStyles.instructions}>
              Select 'Restaurant' for a randomly generated restaurant in your area. 
           </Text>
-        <View style={[{height:100},CustomStyles.card]}>
+        <View style={[{height:100, backgroundColor:'#354047'},CustomStyles.card]}>
     
-          <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
+          <TouchableHighlight underlayColor='#6BEEEE'activeOpacity={.8} onPress={() =>
           navigation.navigate('Cuisines')
           }>
-              <Text style={styles.button }>
+              <Text style={[{color:'#6BEEEE'},styles.button ]}>
                  Cuisine 
               </Text>
           </TouchableHighlight>
@@ -39,12 +39,12 @@ export default function Home({navigation}) {
         <Text style={CustomStyles.instructions}>
             Select 'Cuisine' for a randomly generated cuisine suggestion.
           </Text>
-        <View style={[{height:100},CustomStyles.card]}>
+        <View style={[{height:100,backgroundColor:'#354047'},CustomStyles.card]}>
    
-          <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
+          <TouchableHighlight underlayColor='#AD6BEE'activeOpacity={.8} onPress={() =>
           navigation.navigate('Dates')
           }>
-            <Text style={styles.button }>
+            <Text style={[{color:'#AD6BEE'},styles.button ]}>
              Activity
             </Text>
           </TouchableHighlight>
@@ -62,10 +62,11 @@ const styles = StyleSheet.create({
   button:{
 
    
-    color:'white',
-     backgroundColor:'#354047',
-    textShadowColor:'#95FCF7',
-    textShadowRadius:50,
+   
+  
+paddingBottom:2,
+    textShadowColor:'black',
+    textShadowRadius:10,
 
     fontSize:50,
     fontWeight:'bold',

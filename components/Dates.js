@@ -28,7 +28,7 @@ if(date.title){
     return(
         <View style={CustomStyles.container}>
           <Slogan categorie='date night'/>
-      <View style={[{height:'max-content'},CustomStyles.card]}>
+      <View style={[{height:300},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
             </View>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         color:'white',
         textDecorationLine:'underline',
         textAlign:'center',
-         paddingBottom:30,
+      
         fontSize:30, 
         fontWeight:'bold' ,
        

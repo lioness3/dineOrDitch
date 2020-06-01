@@ -18,7 +18,7 @@
         borderRadius:10,
         borderWidth:2,
         borderColor:'#97CFF2',
-        
+        justifyContent:'space-between'
         // backgroundColor:'#354047',
       
         // shadowColor:'#BBE2FB',
