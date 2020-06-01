@@ -52,10 +52,10 @@ if(date.title){
   
         <View style={CustomStyles.container}>
        
-        <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.3} onPress={() =>
+        <TouchableHighlight underlayColor='#AD6BEE'activeOpacity={.3} onPress={() =>
           generateDate()
           }>
-            <CustomButton title='Date Idea' color='#0E9EF9' />
+            <CustomButton title='Date Idea' color='#AD6BEE' />
           </TouchableHighlight>
         <Text style={CustomStyles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
         </View>  

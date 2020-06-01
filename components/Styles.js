@@ -19,11 +19,7 @@
         borderWidth:2,
         borderColor:'#97CFF2',
         justifyContent:'space-between'
-        // backgroundColor:'#354047',
-      
-        // shadowColor:'#BBE2FB',
-        // shadowRadius:10,
-        // shadowOpacity:0.5,
+
  
       },
     instructions:{

@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
    
    
   
-paddingBottom:2,
+
     textShadowColor:'black',
     textShadowRadius:10,
-
-    fontSize:50,
+    padding:10,
+    fontSize:40,
     fontWeight:'bold',
     textAlign:'center'
   },

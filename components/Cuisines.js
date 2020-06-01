@@ -48,10 +48,10 @@ if(cuisine){
   return(
     <View style={CustomStyles.container}>
 <Slogan categorie='meals'/>
-      <TouchableHighlight underlayColor='#0E9EF9'activeOpacity={.8} onPress={() =>
+      <TouchableHighlight underlayColor='#6BEEEE'activeOpacity={.8} onPress={() =>
           generateCuisine()
           }>
-           <CustomButton title='Cuisine' color='#0E9EF9'/>
+           <CustomButton title='Cuisine' color='#6BEEEE'/>
           </TouchableHighlight>
       <Text style={CustomStyles.instructions}>Press 'Cuisine' for a randomly generated cuisine idea</Text>
     </View>

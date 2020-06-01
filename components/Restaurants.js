@@ -90,7 +90,7 @@ const openSettings = ()=>{
        
        setTypeOfCuisine(typeOfCuisine),
        setLoading(false)
-      console.log(randomNumber,restaurant);
+
       
        
 
@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
     marginVertical:30,
     fontSize: 50,
     color:'white',
-    textShadowColor:'#97CFF2',
-    textShadowRadius:70,
+    textShadowColor:'#6BEE6B',
+    textShadowRadius:30,
 
     textAlign:'center',
     fontWeight:'bold'
