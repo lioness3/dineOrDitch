@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
 
   button:{
     padding:10,
-    fontSize:30,
+    fontSize:40,
     textAlign:'center',
     letterSpacing:2,
-     borderWidth:1,
+     borderWidth:.25,
     fontWeight:'bold',
     margin:1,
   

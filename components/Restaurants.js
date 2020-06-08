@@ -126,8 +126,9 @@ if(loading){
       <Slogan categorie='restaurant choices' />
       <View style={CustomStyles.card}>
         <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.info}>{address}</Text>
         <Text style={styles.type}>{typeOfCuisine}</Text>
+        <Text style={styles.info}>{address}</Text>
+        
         
       </View>
 
@@ -164,12 +165,12 @@ const styles = StyleSheet.create({
   },
   info:{
     color:'white',
-    fontSize: 20,
-    fontWeight:'bold'
+    fontSize: 15,
+ 
   },
   type:{
     color:'white',
-    fontSize: 15,
-    fontWeight:'bold'
+    fontSize: 20,
+ 
   }
 });

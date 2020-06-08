@@ -11,10 +11,12 @@ const [date, setDate] = useState({title:'', description:''})
 const [instructions, setInstructions] = useState("Sometimes it's difficult to come up with ideas." +`${'\n'}` +"I'm here to help!"+`${'\n'}` +"Press the button below for a randomly generate date idea!")
 const [title, setTitle] = useState('Generate Date Idea')
 const [color, setColor] = useState('blue')
-
+const [dateIdeaArray, setDateIdeaArray] = useState([DateIdeas])
 
 const generateDate = ()=>{
-    let num = Math.floor(Math.random() * 21)
+  console.log( dateIdeaArray);
+  let numberofDates = DateIdeas.length
+    let num = Math.floor(Math.random() * numberofDates)
     let ideas = DateIdeas[num] 
     let titleIdea = ideas.title
     let descriptionIdea = ideas.description 

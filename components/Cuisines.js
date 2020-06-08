@@ -8,10 +8,12 @@ import CustomButton from './CustomButton';
 import Slogan from './Slogan'
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
+const [cuisineArray, setCuisineArray] = useState([CuisineIdeas])
 
 const  generateCuisine = ()=>{
-
-  let num =  Math.floor(Math.random() * 10)
+console.log(CuisineIdeas.length, cuisineArray);
+let numberOfCuisineIdeas = CuisineIdeas.length
+  let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
 
    let idea = CuisineIdeas[num];
 
