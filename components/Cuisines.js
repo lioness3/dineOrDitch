@@ -15,7 +15,7 @@ console.log(CuisineIdeas.length, cuisineArray);
 let numberOfCuisineIdeas = CuisineIdeas.length
   let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
 
-   let idea = CuisineIdeas[num];
+   let idea = CuisineIdeas.splice(num, 1);
 
    setCuisine(idea)
 
