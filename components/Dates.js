@@ -29,7 +29,7 @@ const generateDate = ()=>{
 if(date.title){
     return(
         <View style={CustomStyles.container}>
-          <Slogan categorie='date night'/>
+          <Slogan categorie='Date Night'/>
       <View style={[{height:300},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>

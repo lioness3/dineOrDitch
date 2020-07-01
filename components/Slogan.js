@@ -8,7 +8,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 export default function Slogan(props) {
     return(
 <Text style={CustomStyles.instructions}>
-   <Logo/> {'\n'} making {props.categorie} easier
+   <Logo/> {'\n'} Making {props.categorie} Easier
     </Text>
 
 

@@ -123,7 +123,7 @@ if(loading){
   }else if(restaurant) {
   return (
     <View style={CustomStyles.container}>
-      <Slogan categorie='restaurant choices' />
+      <Slogan categorie='Restaurant Choices' />
       <View style={CustomStyles.card}>
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.type}>{typeOfCuisine}</Text>

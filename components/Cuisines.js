@@ -11,13 +11,22 @@ const [cuisine, setCuisine] = useState(null)
 const [cuisineArray, setCuisineArray] = useState([CuisineIdeas])
 
 const  generateCuisine = ()=>{
-console.log(CuisineIdeas.length, cuisineArray);
+
+
 let numberOfCuisineIdeas = CuisineIdeas.length
   let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
+  let idea = CuisineIdeas.splice(num, 1)
+console.log('array:',CuisineIdeas, 'number:',num,'idea length:', idea.length);
+// if(idea.length){
 
-   let idea = CuisineIdeas.splice(num, 1);
+// }
 
-   setCuisine(idea)
+  setCuisine(idea)
+
+
+
+
+  
 
   }
   const openGoogle = (cuisine)=>{
@@ -29,7 +38,7 @@ if(cuisine){
 
   return(
     <View style={CustomStyles.container}>
-   <Slogan categorie='meals'/>
+   <Slogan categorie='Meals'/>
      <View style={[{height:200},CustomStyles.card]}>
       <Text style={styles.idea}>{cuisine}</Text>
       </View>
