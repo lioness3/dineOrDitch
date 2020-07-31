@@ -30,10 +30,10 @@ if(date.title){
     return(
         <View style={CustomStyles.container}>
           <Slogan categorie='Date Night'/>
-      <View style={[{height:300},CustomStyles.card]}>
+          <View style={[{height:300},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             <Text style={styles.description}>{date.description}</Text>
-            </View>
+          </View>
     
             <TouchableHighlight underlayColor='red' activeOpacity={.3} onPress={() =>
           generateDate()

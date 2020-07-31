@@ -6,6 +6,7 @@ import * as Linking from 'expo-linking';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import CustomButton from './CustomButton';
 import Slogan from './Slogan'
+
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
 const [cuisineArray, setCuisineArray] = useState([CuisineIdeas])
@@ -13,12 +14,12 @@ const [cuisineArray, setCuisineArray] = useState([CuisineIdeas])
 const  generateCuisine = ()=>{
 
 
-let numberOfCuisineIdeas = CuisineIdeas.length
+  let numberOfCuisineIdeas = CuisineIdeas.length
   let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
   let idea = CuisineIdeas.splice(num, 1)
-console.log('array:',CuisineIdeas, 'number:',num,'idea length:', idea.length);
-// if(idea.length){
 
+console.log('array:',CuisineIdeas, 'number:', num,'idea length:', idea.length);
+// if(idea.length){
 // }
 
   setCuisine(idea)

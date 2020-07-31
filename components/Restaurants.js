@@ -14,15 +14,16 @@ export default function Restaurants({navigation}) {
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
   const [restaurant, setRestaurant] = useState(null);
+  const [randomNumber, setRandomNumber] = useState(null)
+  const [randomNumberArray, setRandomNumberArray] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [address, setAddress] = useState('');
+  const [typeOfCuisine, setTypeOfCuisine] = useState('');
 
-const [loading, setLoading] = useState(true);
-const [address,setAddress] = useState('');
-const [typeOfCuisine,setTypeOfCuisine] = useState('')
 
 
 
-
-const openSettings = ()=>{
+const openSettings = () => {
   Linking.openSettings()
 }
 
@@ -56,9 +57,7 @@ const openSettings = ()=>{
       setLat(lat),
       setLng(lng),
       setLocated(true)
-     
-     
-      
+
     }
 }
 
@@ -66,10 +65,26 @@ const openSettings = ()=>{
 
 
  async function  generateRestaurant() {
+  //MAYBE CHANGE TO IF NOT LOCATED
    if(!lat){
      handleLocationPermission()
    }else{
-    let randomNumber = Math.floor(Math.random() * 20)
+    //  STORE RANDOM NUMBER IN AN ARRAY AND CHECK TO SEE IF YOUVE USED IT BEFORE
+    let uniqueNumber = Math.floor(Math.random() * 20)
+   
+//  IF THE RANDOM NUMBER HAS NOT YET BEEN ADDED TO THE Array, ADDIT, ELSE, REGENERATE
+
+    let compareUniqueNumber = randomNumberArray.includes(uniqueNumber)
+ 
+    
+    if( compareUniqueNumber === false )  {
+      setRandomNumber(uniqueNumber)
+      setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber]) 
+      console.log('random number array:', randomNumberArray, 'random number:', randomNumber, 'restaurant:', restaurant);
+    }  
+   
+   
+    
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
