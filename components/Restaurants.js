@@ -13,14 +13,14 @@ export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
-  const [restaurant, setRestaurant] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(null)
+  const [restaurant, setRestaurant] = useState('');
+ const [randomNumber, setRandomNumber] = useState(Math.floor(Math.random() * 20))
   const [randomNumberArray, setRandomNumberArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
 
-
+console.log(randomNumber);
 
 
 const openSettings = () => {
@@ -61,7 +61,20 @@ const openSettings = () => {
     }
 }
 
+ const handleRandomNumber = () =>{
+ 
 
+
+
+ 
+  let compareUniqueNumber = randomNumberArray.includes(randomNumber)
+  if( compareUniqueNumber === false )  {
+    console.log(compareUniqueNumber, 'number hasnt been used yet');
+    setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber])
+    console.log(randomNumber, randomNumberArray);
+  }  
+
+}
 
 
  async function  generateRestaurant() {
@@ -70,18 +83,16 @@ const openSettings = () => {
      handleLocationPermission()
    }else{
     //  STORE RANDOM NUMBER IN AN ARRAY AND CHECK TO SEE IF YOUVE USED IT BEFORE
-    let uniqueNumber = Math.floor(Math.random() * 20)
+    handleRandomNumber()
+
    
 //  IF THE RANDOM NUMBER HAS NOT YET BEEN ADDED TO THE Array, ADDIT, ELSE, REGENERATE
 
-    let compareUniqueNumber = randomNumberArray.includes(uniqueNumber)
+console.log(randomNumber);
+
  
     
-    if( compareUniqueNumber === false )  {
-      setRandomNumber(uniqueNumber)
-      setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber]) 
-      console.log('random number array:', randomNumberArray, 'random number:', randomNumber, 'restaurant:', restaurant);
-    }  
+    
    
    
     
@@ -98,6 +109,8 @@ const openSettings = () => {
        }
      }).then(res => {
        let restaurant = res.data.restaurants[randomNumber].restaurant.name
+       console.log(restaurant);
+       
        let address = res.data.restaurants[randomNumber].restaurant.location.locality
        let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
      setRestaurant(restaurant),
@@ -106,7 +119,8 @@ const openSettings = () => {
        setTypeOfCuisine(typeOfCuisine),
        setLoading(false)
 
-      
+          
+       console.log(  'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
        
 
      }).catch(err => {
