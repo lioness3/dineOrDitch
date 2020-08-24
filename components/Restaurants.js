@@ -57,7 +57,7 @@ const openSettings = () => {
       let lng = position.coords.longitude
       setLat(lat),
       setLng(lng),
-      handleRandomNumber(),
+    
       setLocated(true)
      
 
@@ -82,7 +82,7 @@ const openSettings = () => {
    
   }else if( compareUniqueNumber === true ){
     console.log('numb ers been used')
-   return 
+  
   }
 
 }
@@ -127,7 +127,8 @@ const openSettings = () => {
       setAddress(address),
        setData(newData),
        setTypeOfCuisine(typeOfCuisine),
-       setLoading(false)
+       setLoading(false),
+      //  setRandomNumber(null)
     
           
        console.log( newData, 'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
@@ -138,7 +139,7 @@ const openSettings = () => {
      })
    }else if(!randomNumber){
      console.log('no random number:', randomNumber)
-     handleRandomNumber()
+  
    }
    
    
@@ -152,6 +153,11 @@ const openSettings = () => {
     generateRestaurant()
   
  }, [located])
+ useEffect( ()=>{
+
+  handleRandomNumber()
+
+}, [loading])
 
 const openMap = (restaurant)=>{
   
