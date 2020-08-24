@@ -13,14 +13,15 @@ export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
+  const [data, setData] = useState([])
   const [restaurant, setRestaurant] = useState('');
- const [randomNumber, setRandomNumber] = useState(Math.floor(Math.random() * 20))
+ const [randomNumber, setRandomNumber] = useState(null)
   const [randomNumberArray, setRandomNumberArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
 
-console.log(randomNumber);
+
 
 
 const openSettings = () => {
@@ -56,23 +57,33 @@ const openSettings = () => {
       let lng = position.coords.longitude
       setLat(lat),
       setLng(lng),
+      handleRandomNumber(),
       setLocated(true)
+     
 
     }
 }
 
  const handleRandomNumber = () =>{
- 
+ let newNumber = Math.floor(Math.random() * 20)
 
 
 
  
-  let compareUniqueNumber = randomNumberArray.includes(randomNumber)
+  // let compareUniqueNumber = randomNumberArray.includes(randomNumber)
+  let compareUniqueNumber = randomNumberArray.includes(newNumber)
   if( compareUniqueNumber === false )  {
-    console.log(compareUniqueNumber, 'number hasnt been used yet');
-    setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber])
-    console.log(randomNumber, randomNumberArray);
-  }  
+   
+    setRandomNumber(newNumber)
+
+    console.log('number hasnt been used yet','randomNumber:', randomNumber, 'newNumber:',newNumber);
+    setRandomNumberArray(randomNumberArray => [...randomNumberArray, newNumber])
+
+   
+  }else if( compareUniqueNumber === true ){
+    console.log('numb ers been used')
+   return 
+  }
 
 }
 
@@ -81,21 +92,19 @@ const openSettings = () => {
   //MAYBE CHANGE TO IF NOT LOCATED
    if(!lat){
      handleLocationPermission()
-   }else{
+   }
     //  STORE RANDOM NUMBER IN AN ARRAY AND CHECK TO SEE IF YOUVE USED IT BEFORE
-    handleRandomNumber()
+    
 
    
 //  IF THE RANDOM NUMBER HAS NOT YET BEEN ADDED TO THE Array, ADDIT, ELSE, REGENERATE
 
-console.log(randomNumber);
+
 
  
     
-    
-   
-   
-    
+   if (randomNumber){
+  
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
@@ -108,27 +117,35 @@ console.log(randomNumber);
          'sort': 'real_distance'
        }
      }).then(res => {
+      console.log(randomNumber,'from  api call')
        let restaurant = res.data.restaurants[randomNumber].restaurant.name
-       console.log(restaurant);
-       
+      
+       let newData = res.data.restaurants
        let address = res.data.restaurants[randomNumber].restaurant.location.locality
        let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
      setRestaurant(restaurant),
       setAddress(address),
-       
+       setData(newData),
        setTypeOfCuisine(typeOfCuisine),
        setLoading(false)
-
+    
           
-       console.log(  'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
+       console.log( newData, 'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
        
 
      }).catch(err => {
        console.log('error',err.message)
      })
+   }else if(!randomNumber){
+     console.log('no random number:', randomNumber)
+     handleRandomNumber()
+   }
+   
+   
+  
     
   }
-   }
+
   
   useEffect( ()=>{
 
@@ -165,7 +182,7 @@ if(loading){
         <CustomButton title='Dine' color='#58E80B'/>
        </TouchableHighlight>
 
-      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), generateRestaurant()}}>
+      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true),  setRandomNumber(null) ,generateRestaurant()}}>
       <CustomButton title='Ditch' color='red'/>
       </TouchableHighlight>
   
