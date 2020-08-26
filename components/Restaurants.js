@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text,Alert, View,ActivityIndicator} from 'react-native';
 import * as Location from 'expo-location';
 import axios from 'axios';
+
 import * as Linking from 'expo-linking';
 import * as Permissions from 'expo-permissions';
 import CustomStyles from './Styles';
@@ -77,11 +78,13 @@ const openSettings = () => {
     setRandomNumber(newNumber)
 
     console.log('number hasnt been used yet','randomNumber:', randomNumber, 'newNumber:',newNumber);
-    setRandomNumberArray(randomNumberArray => [...randomNumberArray, newNumber])
+    setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber])
 
    
   }else if( compareUniqueNumber === true ){
-    console.log('numb ers been used')
+    console.log('number is a duplicate..loading')
+    handleRandomNumber()
+   
   
   }
 
@@ -103,7 +106,7 @@ const openSettings = () => {
 
  
     
-   if (randomNumber){
+   if (randomNumber >= 0){
   
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
@@ -117,6 +120,7 @@ const openSettings = () => {
          'sort': 'real_distance'
        }
      }).then(res => {
+       console.log('this siw hat is does witha zero',res.data.restaurants[0].restaurant.name )
       console.log(randomNumber,'from  api call')
        let restaurant = res.data.restaurants[randomNumber].restaurant.name
       
@@ -131,15 +135,16 @@ const openSettings = () => {
       //  setRandomNumber(null)
     
           
-       console.log( newData, 'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
+       console.log(  'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
        
 
      }).catch(err => {
        console.log('error',err.message)
      })
    }else if(!randomNumber){
-     console.log('no random number:', randomNumber)
-  
+     console.log('no random number:',  typeof randomNumber)
+     setLoading(true)
+
    }
    
    
@@ -176,7 +181,7 @@ if(loading){
   return (
     <View style={CustomStyles.container}>
       <Slogan categorie='Restaurant Choices' />
-      <View style={CustomStyles.card}>
+      <View style={[{backgroundColor:'#354047',},CustomStyles.card]}>
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.type}>{typeOfCuisine}</Text>
         <Text style={styles.info}>{address}</Text>
@@ -185,11 +190,13 @@ if(loading){
       </View>
 
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
-        <CustomButton title='Dine' color='#58E80B'/>
+        <CustomButton title='Dine' color='#58E80B' icon='check'/>
+   
        </TouchableHighlight>
 
       <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true),  setRandomNumber(null) ,generateRestaurant()}}>
-      <CustomButton title='Ditch' color='red'/>
+      <CustomButton title='Ditch' color='red' icon='close'/>
+   
       </TouchableHighlight>
   
       <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
@@ -206,22 +213,22 @@ const styles = StyleSheet.create({
     fontWeight:'bold'
   },
   name:{
-    marginVertical:30,
+    marginVertical: 30,
     fontSize: 50,
+    
+    textShadowColor:'black',
+    textShadowRadius:5,
     color:'white',
-    textShadowColor:'#6BEE6B',
-    textShadowRadius:30,
-
     textAlign:'center',
     fontWeight:'bold'
   },
   info:{
-    color:'white',
+    color:'black',
     fontSize: 15,
  
   },
   type:{
-    color:'white',
+    color:'black',
     fontSize: 20,
  
   }

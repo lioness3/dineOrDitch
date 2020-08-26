@@ -9,7 +9,7 @@ import Slogan from './Slogan'
 
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
-const [cuisineArray, setCuisineArray] = useState([CuisineIdeas])
+
 
 const  generateCuisine = ()=>{
 
@@ -18,9 +18,8 @@ const  generateCuisine = ()=>{
   let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
   let idea = CuisineIdeas.splice(num, 1)
 
-console.log('array:',CuisineIdeas, 'number:', num,'idea length:', idea.length);
-// if(idea.length){
-// }
+console.log('array:',CuisineIdeas, 'number:', num,'idea length:', );
+
 
   setCuisine(idea)
 
@@ -40,7 +39,7 @@ if(cuisine){
   return(
     <View style={CustomStyles.container}>
    <Slogan categorie='Meals'/>
-     <View style={[{height:200},CustomStyles.card]}>
+     <View style={[{height:200, backgroundColor:'#354047'},CustomStyles.card]}>
       <Text style={styles.idea}>{cuisine}</Text>
       </View>
       <TouchableHighlight underlayColor='red' activeOpacity={.2} onPress={() =>

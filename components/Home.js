@@ -45,13 +45,13 @@ export default function Home({navigation}) {
           navigation.navigate('Dates')
           }>
             <Text style={[{color:'#AD6BEE'},styles.button ]}>
-             Activity
+             Date
             </Text>
           </TouchableHighlight>
    
         </View>
         <Text style={CustomStyles.instructions}>
-          Select 'Activity' for a randomly generated date suggestion.
+          Select 'Date' for a randomly generated date suggestion.
           </Text>
       </View>
     );
