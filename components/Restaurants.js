@@ -16,8 +16,7 @@ export default function Restaurants({navigation}) {
   const [located, setLocated] = useState(false);
   const [data, setData] = useState([])
   const [restaurant, setRestaurant] = useState([]);
- const [randomNumber, setRandomNumber] = useState(null)
-  const [randomNumberArray, setRandomNumberArray] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
