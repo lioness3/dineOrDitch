@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput,ActivityIndicator } from 'react-native';
 import CuisineIdeas from './CuisineIdeas'
 import CustomStyles from './Styles'
 import * as Linking from 'expo-linking';
@@ -9,7 +9,7 @@ import Slogan from './Slogan'
 
 export default function Dates() {
 const [cuisine, setCuisine] = useState(null)
-
+const [loading, setLoading] = useState(true)
 
 const  generateCuisine = ()=>{
 
@@ -18,25 +18,29 @@ const  generateCuisine = ()=>{
   let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
   let idea = CuisineIdeas.splice(num, 1)
 
-console.log('array:',CuisineIdeas, 'number:', num,'idea length:', );
-
-
   setCuisine(idea)
-
-
-
-
+  setLoading(false)
+  console.log(cuisine);
   
-
   }
   const openGoogle = (cuisine)=>{
   
     Linking.openURL('https://www.google.com/search?q='+`${cuisine}`+'+recipe')
   }
+ 
+  if(loading){
+    generateCuisine()
+    return(
+      <View style={CustomStyles.container}>
+        
+        <ActivityIndicator size='large' color='#95FCF7'/> 
+        <Text style={styles.loading}>Thinking...</Text>
+      </View>
+      )
+    }else if(cuisine){
 
-if(cuisine){
 
-  return(
+    return(
     <View style={CustomStyles.container}>
    <Slogan categorie='Meals'/>
      <View style={[{height:200, backgroundColor:'#354047'},CustomStyles.card]}>
