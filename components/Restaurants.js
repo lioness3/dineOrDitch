@@ -67,12 +67,8 @@ const openSettings = () => {
 
  const handleRandomNumber = () =>{
  let newNumber = Math.floor(Math.random() * 20)
-
-
-
- 
-  // let compareUniqueNumber = randomNumberArray.includes(randomNumber)
   let compareUniqueNumber = randomNumberArray.includes(newNumber)
+
   if( compareUniqueNumber === false )  {
    
     setRandomNumber(newNumber)
