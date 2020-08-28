@@ -15,7 +15,7 @@ export default function Restaurants({navigation}) {
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
   const [data, setData] = useState([])
-  const [restaurant, setRestaurant] = useState('');
+  const [restaurant, setRestaurant] = useState([]);
  const [randomNumber, setRandomNumber] = useState(null)
   const [randomNumberArray, setRandomNumberArray] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -66,28 +66,28 @@ const openSettings = () => {
 }
 
  const handleRandomNumber = () =>{
- let newNumber = Math.floor(Math.random() * 20)
-  let compareUniqueNumber = randomNumberArray.includes(newNumber)
 
-  if( compareUniqueNumber === false )  {
-   
-    setRandomNumber(newNumber)
+  let newList = data
+  let numberOfRestaurants = newList.length
+  let num =  Math.floor(Math.random() * numberOfRestaurants)
+  let restaurantInfo = newList.splice(num, 1)
+  let name = restaurantInfo[0].restaurant.name
 
-    console.log('number hasnt been used yet','randomNumber:', randomNumber, 'newNumber:',newNumber);
-    setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber])
+  setData(newList),
+  setRestaurant(name),
+  setLoading(false)
+console.log(numberOfRestaurants,'newList:', newList, 'data:', data, 'restaurant', );
 
-   
-  }else if( compareUniqueNumber === true ){
-    console.log('number is a duplicate..loading')
-    handleRandomNumber()
+  
+
+
    
   
-  }
 
 }
 
 
- async function  generateRestaurant() {
+ async function  generateRestaurants() {
   //MAYBE CHANGE TO IF NOT LOCATED
    if(!lat){
      handleLocationPermission()
@@ -106,9 +106,10 @@ const openSettings = () => {
        }
      }).then(res => {
       let data = res.data.restaurants
-
        setData(data),
-       setLoading(false)
+
+    
+      setLoading(false)
 
      }).catch(err => {
        console.log('error',err.message)
@@ -118,12 +119,13 @@ const openSettings = () => {
    
   
     
+
  
 
   
   useEffect( ()=>{
 
-    generateRestaurant()
+    generateRestaurants()
   
  }, [located])
 
@@ -141,12 +143,12 @@ if(loading){
       <Text style={styles.loading}>Thinking...</Text>
     </View>
     )
-  } else if(data) {
+  } else if(restaurant) {
   return (
     <View style={CustomStyles.container}>
       <Slogan categorie='Restaurant Choices' />
       <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
-        <Text style={styles.name}>restaurant </Text>
+        <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.type}></Text>
         <Text style={styles.info}></Text>
         
@@ -158,7 +160,7 @@ if(loading){
    
        </TouchableHighlight>
 
-      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true),  setRandomNumber(null) ,generateRestaurant()}}>
+      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), handleRandomNumber()}}>
       <CustomButton title='Ditch' color='red' icon='close'/>
    
       </TouchableHighlight>
