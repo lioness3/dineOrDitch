@@ -92,18 +92,7 @@ const openSettings = () => {
    if(!lat){
      handleLocationPermission()
    }
-    //  STORE RANDOM NUMBER IN AN ARRAY AND CHECK TO SEE IF YOUVE USED IT BEFORE
-    
 
-   
-//  IF THE RANDOM NUMBER HAS NOT YET BEEN ADDED TO THE Array, ADDIT, ELSE, REGENERATE
-
-
-
- 
-    
-   if (randomNumber >= 0){
-  
     await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
@@ -116,37 +105,20 @@ const openSettings = () => {
          'sort': 'real_distance'
        }
      }).then(res => {
-       console.log('this siw hat is does witha zero',res.data.restaurants[0].restaurant.name )
-      console.log(randomNumber,'from  api call')
-       let restaurant = res.data.restaurants[randomNumber].restaurant.name
-      
-       let newData = res.data.restaurants
-       let address = res.data.restaurants[randomNumber].restaurant.location.locality
-       let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
-     setRestaurant(restaurant),
-      setAddress(address),
-       setData(newData),
-       setTypeOfCuisine(typeOfCuisine),
-       setLoading(false),
-      //  setRandomNumber(null)
-    
-          
-       console.log(  'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
-       
+      let data = res.data.restaurants
+
+       setData(data),
+       setLoading(false)
 
      }).catch(err => {
        console.log('error',err.message)
      })
-   }else if(!randomNumber){
-     console.log('no random number:',  typeof randomNumber)
-     setLoading(true)
-
-   }
+    }    
    
    
   
     
-  }
+ 
 
   
   useEffect( ()=>{
@@ -154,11 +126,7 @@ const openSettings = () => {
     generateRestaurant()
   
  }, [located])
- useEffect( ()=>{
 
-  handleRandomNumber()
-
-}, [loading])
 
 const openMap = (restaurant)=>{
   
@@ -173,14 +141,14 @@ if(loading){
       <Text style={styles.loading}>Thinking...</Text>
     </View>
     )
-  }else if(restaurant) {
+  } else if(data) {
   return (
     <View style={CustomStyles.container}>
       <Slogan categorie='Restaurant Choices' />
-      <View style={[{backgroundColor:'#354047',},CustomStyles.card]}>
-        <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.type}>{typeOfCuisine}</Text>
-        <Text style={styles.info}>{address}</Text>
+      <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
+        <Text style={styles.name}>restaurant </Text>
+        <Text style={styles.type}></Text>
+        <Text style={styles.info}></Text>
         
         
       </View>
