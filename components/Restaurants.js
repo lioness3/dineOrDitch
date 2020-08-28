@@ -71,9 +71,13 @@ const openSettings = () => {
   let num =  Math.floor(Math.random() * numberOfRestaurants)
   let restaurantInfo = newList.splice(num, 1)
   let name = restaurantInfo[0].restaurant.name
-
+  let type = 'serves' + ' ' + restaurantInfo[0].restaurant.cuisines
+  let typeOfCuisine = type.toLowerCase()
+  let address = 'located in' + ' ' + restaurantInfo[0].restaurant.location.locality
   setData(newList),
   setRestaurant(name),
+  setTypeOfCuisine(typeOfCuisine),
+  setAddress(address),
   setLoading(false)
 console.log(numberOfRestaurants,'newList:', newList, 'data:', data, 'restaurant', );
 
@@ -115,11 +119,6 @@ console.log(numberOfRestaurants,'newList:', newList, 'data:', data, 'restaurant'
      })
     }    
    
-   
-  
-    
-
- 
 
   
   useEffect( ()=>{
@@ -148,8 +147,8 @@ if(loading){
       <Slogan categorie='Restaurant Choices' />
       <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
         <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.type}></Text>
-        <Text style={styles.info}></Text>
+        <Text style={styles.type}> {typeOfCuisine}</Text>
+        <Text style={styles.info}>{address}</Text>
         
         
       </View>
@@ -179,7 +178,7 @@ const styles = StyleSheet.create({
   },
   name:{
     marginVertical: 30,
-    fontSize: 50,
+    fontSize: 40,
     
     textShadowColor:'black',
     textShadowRadius:5,
