@@ -31,13 +31,13 @@ export default function Home({navigation}) {
           navigation.navigate('Cuisines')
           }>
               <Text style={[{color:'#6BEEEE'},styles.button ]}>
-                 Cuisine 
+                 Recipe 
               </Text>
           </TouchableHighlight>
        
         </View>
         <Text style={CustomStyles.instructions}>
-            Select 'Cuisine' for a randomly generated cuisine suggestion.
+            Select 'Recipe' for a randomly generated cuisine suggestion.
           </Text>
         <View style={[{height:100,backgroundColor:'#354047'},CustomStyles.card]}>
    

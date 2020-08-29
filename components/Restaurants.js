@@ -14,13 +14,14 @@ export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [restaurant, setRestaurant] = useState([]);
-
+const [moreOptions, setMoreOptions] = useState(false)
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
-
+  const[startFrom, setStartFrom] = useState('0')
+  const [radius, setRadius] = useState('8000')
 
 
 
@@ -51,7 +52,7 @@ const openSettings = () => {
     }else if(!located){
       console.log('locating');
       const position = await Location.getCurrentPositionAsync()
-    console.log('located');
+   
     
       let lat =  position.coords.latitude
       let lng = position.coords.longitude
@@ -59,44 +60,64 @@ const openSettings = () => {
       setLng(lng),
     
       setLocated(true)
-     
+      console.log('located');
 
     }
 }
 
- const handleRandomNumber = () =>{
-
-  let newList = data
+ const handleRandomNumber = (data) =>{
+   console.log(startFrom, radius);
+   
+if (data.length > 0){ 
+   let newList = data
   let numberOfRestaurants = newList.length
   let num =  Math.floor(Math.random() * numberOfRestaurants)
   let restaurantInfo = newList.splice(num, 1)
+  let type =  restaurantInfo[0].restaurant.cuisines
+  if (type){
+    if(type.includes('Fast Food')){
+     return(      setLoading(true),
+     handleRandomNumber(data)) 
+
+
+    }
+   let typeOfCuisine = 'serves' + ' ' + type.toLowerCase()
+   setTypeOfCuisine(typeOfCuisine)
+  }
+ 
+ 
+  
+ 
   let name = restaurantInfo[0].restaurant.name
-  let type = 'serves' + ' ' + restaurantInfo[0].restaurant.cuisines
+
   let typeOfCuisine = type.toLowerCase()
   let address = 'located in' + ' ' + restaurantInfo[0].restaurant.location.locality
   setData(newList),
   setRestaurant(name),
-  setTypeOfCuisine(typeOfCuisine),
+
   setAddress(address),
   setLoading(false)
-console.log(numberOfRestaurants,'newList:', newList, 'data:', data, 'restaurant', );
-
-  
-
-
-   
-  
+}else{
+  setMoreOptions(true),
+  setLoading(false)
+} 
 
 }
 
 
- async function  generateRestaurants() {
+ async function  generateRestaurants(startFrom, radius) {
+let startNum = startFrom.toString()
+let radiusNum = radius.toString()
+  setStartFrom(startNum)
+  setRadius(radiusNum)
+
+ 
   //MAYBE CHANGE TO IF NOT LOCATED
    if(!lat){
      handleLocationPermission()
    }
-
-    await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
+if(located){
+  await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
          'user-key': 'a31bd76da32396a27b6906bf0ca707a2'
@@ -104,26 +125,33 @@ console.log(numberOfRestaurants,'newList:', newList, 'data:', data, 'restaurant'
        params: {
          'lat':`${lat}`,
          'lon': `${lng}`,
-         'radius':'8000',
+         'start':`${startFrom}`,
+         'radius':`${radius}`,
          'sort': 'real_distance'
        }
      }).then(res => {
       let data = res.data.restaurants
-       setData(data),
+     
+ 
+        setData(data),
+      handleRandomNumber(data)
 
+
+     
     
-      setLoading(false)
 
      }).catch(err => {
        console.log('error',err.message)
      })
+}
+  
     }    
    
 
   
   useEffect( ()=>{
 
-    generateRestaurants()
+    generateRestaurants(startFrom, radius)
   
  }, [located])
 
@@ -141,7 +169,30 @@ if(loading){
       <Text style={styles.loading}>Thinking...</Text>
     </View>
     )
-  } else if(restaurant) {
+  }else if(moreOptions){
+    return (
+      <View style={CustomStyles.container}>
+        <Slogan categorie='Restaurant Choices' />
+        <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
+        <Text>PLEASE EXPAND YOUR SEARCH FOR MORE RESULTS</Text>
+          
+          
+        </View>
+  
+        <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{
+         setLoading(true), setMoreOptions(false),generateRestaurants((parseInt(startFrom) + 20),parseInt(radius)+ 10000)}}>
+          <CustomButton title='Expand Search' color='#58E80B' icon='check'/>
+     
+         </TouchableHighlight>
+  
+        <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {navigation.navigate('Cuisines')}}>
+        <CustomButton title='Recipie Suggestions' color='red' icon='close'/>
+     
+        </TouchableHighlight>
+    
+        <Text style={CustomStyles.instructions}>Press 'Expand Search' for more restaurant suggestions {'\n'} or {'\n'}Press 'Recipie Suggestions' to stay home and cook instead. </Text>
+      </View>
+    )}else {
   return (
     <View style={CustomStyles.container}>
       <Slogan categorie='Restaurant Choices' />
@@ -158,7 +209,7 @@ if(loading){
    
        </TouchableHighlight>
 
-      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), handleRandomNumber()}}>
+      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), handleRandomNumber(data)}}>
       <CustomButton title='Ditch' color='red' icon='close'/>
    
       </TouchableHighlight>

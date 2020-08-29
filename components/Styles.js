@@ -4,7 +4,7 @@
     container: {
         flex: 5,
         backgroundColor: 'black',
-        textAlign:'center',
+
         justifyContent:'space-evenly',
         alignContent:'flex-end',
         paddingBottom:20,

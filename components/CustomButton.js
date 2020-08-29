@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 
 export default function CustomButton(props) {
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
   button:{
     padding:10,
     borderRadius:10,
-    fontSize:60,
+    fontSize:40,
     textAlign:'center',
     letterSpacing:2,
    
