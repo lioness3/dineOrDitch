@@ -178,19 +178,21 @@ if(loading){
           
           
         </View>
-  
+        <Text style={CustomStyles.instructions}>
+          Press 'Expand Search' for more restaurant suggestions {'\n'} or {'\n'}Press 'Recipie Suggestions' to stay home and cook instead.
+         </Text>
         <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{
-         setLoading(true), setMoreOptions(false),generateRestaurants((parseInt(startFrom) + 20),parseInt(radius)+ 10000)}}>
+         setLoading(true), setMoreOptions(false), generateRestaurants((parseInt(startFrom) + 20),parseInt(radius)+ 10000)}}>
           <CustomButton title='Expand Search' color='#58E80B' icon='check'/>
      
          </TouchableHighlight>
   
         <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {navigation.navigate('Cuisines')}}>
-        <CustomButton title='Recipie Suggestions' color='red' icon='close'/>
+         <CustomButton title='Recipie Suggestions' color='red' icon='close'/>
      
         </TouchableHighlight>
     
-        <Text style={CustomStyles.instructions}>Press 'Expand Search' for more restaurant suggestions {'\n'} or {'\n'}Press 'Recipie Suggestions' to stay home and cook instead. </Text>
+  
       </View>
     )}else {
   return (
@@ -200,10 +202,8 @@ if(loading){
         <Text style={styles.name}>{restaurant} </Text>
         <Text style={styles.type}> {typeOfCuisine}</Text>
         <Text style={styles.info}>{address}</Text>
-        
-        
       </View>
-
+      <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
         <CustomButton title='Dine' color='#58E80B' icon='check'/>
    
@@ -214,7 +214,7 @@ if(loading){
    
       </TouchableHighlight>
   
-      <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
+     
     </View>
   )
  }

@@ -51,10 +51,13 @@ const  generateCuisine = ()=>{
      <View style={[{height:200, backgroundColor:'#354047'},CustomStyles.card]}>
       <Text style={styles.idea}>{cuisine}</Text>
       </View>
+      <Text style={CustomStyles.instructions}>
+        Press 'Recipe' for {cuisine} recipe suggestions.{'\n'} or {'\n'}Press 'Ditch' for another cuisine suggestion.
+      </Text>
       <TouchableHighlight underlayColor='#58E80B' activeOpacity={.8} onPress={() =>
       openGoogle(cuisine)
       }>
-      <CustomButton title='Recipe' color='#58E80B' icon='list-alt'/>
+        <CustomButton title='Recipe' color='#58E80B' icon='list-alt'/>
       </TouchableHighlight>
       <TouchableHighlight underlayColor='red' activeOpacity={.2} onPress={() =>
           generateCuisine()
@@ -62,7 +65,7 @@ const  generateCuisine = ()=>{
         <CustomButton title='Ditch' color='red' icon='close'/>
       </TouchableHighlight>
  
-      <Text style={CustomStyles.instructions}>Press 'Ditch' for another cuisine suggestion.{'\n'} or {'\n'}Press 'Recipe' for {cuisine} recipe suggestions.</Text>
+    
     </View>
     );
 }else if(restaurants){
@@ -73,9 +76,12 @@ const  generateCuisine = ()=>{
           navigator.navigate('Restaurants')
           }>
             <Text>MAYBE YOU SHOULD GO OUT TO EAT</Text>
+            <Text style={CustomStyles.instructions}>
+            Press 'Restaurant' for a randomly generated restaurant in your area
+            </Text>
            <CustomButton title='Restaurant' color='#6BEEEE'/>
           </TouchableHighlight>
-      <Text style={CustomStyles.instructions}>Press 'Restaurant' for a randomly generated Restaurant in your area</Text>
+
     </View>
     );
 }
