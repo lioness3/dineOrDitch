@@ -15,15 +15,20 @@ const [details, setDetails] = useState(false)
 
 const generateDate = ()=>{
 
+
   let numberofDates = DateIdeas.length
     let num = Math.floor(Math.random() * numberofDates)
-    let ideas = DateIdeas[num] 
-    let titleIdea = ideas.title
-    let descriptionIdea = ideas.description 
+    let ideas = DateIdeas.splice(num, 1) 
+  
+
+    let titleIdea = ideas[0].title
+    let descriptionIdea = ideas[0].description 
 
     
      setDate({ title: titleIdea, description: descriptionIdea})
      setLoading(false)
+
+ 
 
     }
 

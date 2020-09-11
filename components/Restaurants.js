@@ -22,6 +22,7 @@ const [moreOptions, setMoreOptions] = useState(false)
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
   const[startFrom, setStartFrom] = useState('0')
   const [radius, setRadius] = useState('8000')
+  const [display, setDisplay] = useState(false)
 
 
 
@@ -200,12 +201,17 @@ if(loading){
       <Slogan categorie='Restaurant Choices' />
       <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
         <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.type}> {typeOfCuisine}</Text>
-        <Text style={styles.info}>{address}</Text>
+        <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{setDisplay(!display)}}>
+        <CustomButton size={10} icon='ellipsis-h' color='white' fontSize={'10'} title={'more'}/>
+   
+       </TouchableHighlight>
+       {display ?  <View><Text style={styles.type}> {typeOfCuisine}</Text>
+        <Text style={styles.info}>{address}</Text></View> : null}
+       
       </View>
       <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
-        <CustomButton title='Dine' color='#58E80B' icon='check'/>
+        <CustomButton title='Dine' color='#58E80B' icon='map-marker'/>
    
        </TouchableHighlight>
 

@@ -8,7 +8,7 @@ import CustomButton from './CustomButton';
 import Slogan from './Slogan'
 import { set } from 'react-native-reanimated';
 
-export default function Dates() {
+export default function Cuisines({navigation}) {
 const [cuisine, setCuisine] = useState(null)
 const [loading, setLoading] = useState(true)
 const [restaurants, setRestaurants] = useState(false)
@@ -16,16 +16,22 @@ const  generateCuisine = ()=>{
 
 
   let numberOfCuisineIdeas = CuisineIdeas.length
-  if(numberOfCuisineIdeas <= 0){
-    setRestaurants(true)
-   
+ 
+  
+ 
+    let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
+    let idea = CuisineIdeas.splice(num, 1)
+  if(idea.length > 0){
+    setCuisine(idea) 
+    setLoading(false)
+  }else{
+   setRestaurants(true)
   }
-  let num =  Math.floor(Math.random() * numberOfCuisineIdeas)
-  let idea = CuisineIdeas.splice(num, 1)
+ 
 
-  setCuisine(idea)
-  setLoading(false)
-  console.log(cuisine);
+ 
+  
+
   
   }
   const openGoogle = (cuisine)=>{
@@ -42,7 +48,7 @@ const  generateCuisine = ()=>{
         <Text style={styles.loading}>Thinking...</Text>
       </View>
       )
-    }else if(cuisine){
+    }else if(restaurants === false){
 
 
     return(
@@ -68,18 +74,19 @@ const  generateCuisine = ()=>{
     
     </View>
     );
-}else if(restaurants){
+}else{
   return(
     <View style={CustomStyles.container}>
 <Slogan categorie='meals'/>
-      <TouchableHighlight underlayColor='#6BEEEE'activeOpacity={.8} onPress={() =>
-          navigator.navigate('Restaurants')
-          }>
-            <Text>MAYBE YOU SHOULD GO OUT TO EAT</Text>
+<Text style={styles.idea}>MAYBE YOU SHOULD GO OUT TO EAT</Text>
             <Text style={CustomStyles.instructions}>
             Press 'Restaurant' for a randomly generated restaurant in your area
             </Text>
-           <CustomButton title='Restaurant' color='#6BEEEE'/>
+      <TouchableHighlight underlayColor='#6BEEEE'activeOpacity={.8} onPress={() =>
+          {navigation.navigate('Restaurants')}
+          }>
+        
+           <CustomButton title='Restaurant' color='#6BEEEE' icon='cutlery '/>
           </TouchableHighlight>
 
     </View>
