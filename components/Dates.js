@@ -39,7 +39,7 @@ const generateDate = ()=>{
     return(
         <View style={CustomStyles.container}>
           <Slogan categorie='Date Night'/>
-          <View style={[{height:300},CustomStyles.card]}>
+          <View style={[{height:150},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
             {details ? <Text style={styles.description}>{date.description}</Text>    : null}
           </View>
@@ -69,16 +69,14 @@ const styles = StyleSheet.create({
  
  
     title:{
-     
+        marginVertical: 30,
+        fontSize: 20,
+        
+        textShadowColor:'black',
+        textShadowRadius:5,
         color:'white',
-        textDecorationLine:'underline',
         textAlign:'center',
-      
-        fontSize:30, 
-        fontWeight:'bold' ,
-       
-
-     
+        fontWeight:'bold'
        
     },
     description:{
