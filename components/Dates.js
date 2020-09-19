@@ -53,12 +53,9 @@ const generateDate = ()=>{
             <TouchableHighlight underlayColor='red' activeOpacity={.3} onPress={() =>
           generateDate()
           }>
-            <View style={{
-              shadowColor:'yellow',
-              shadowRadius:30,
-              shadowOpacity:0.5,}}>
+ 
                <CustomButton title='Ditch' color='red' icon='close'/>
-            </View>
+         
           </TouchableHighlight>
         
            
