@@ -202,7 +202,7 @@ if(loading){
       <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
         <Text style={styles.name}>{restaurant} </Text>
         <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{setDisplay(!display)}}>
-        <CustomButton size={10} icon='ellipsis-h' color='white' fontSize={'10'} title={'more'}/>
+        <CustomButton size={10} icon='ellipsis-h' color='white' />
    
        </TouchableHighlight>
        {display ?  <View><Text style={styles.type}> {typeOfCuisine}</Text>
