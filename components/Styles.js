@@ -15,6 +15,7 @@
     card: {
        
         padding: 20,
+        marginHorizontal:100,
         borderRadius:10,
         borderWidth:2,
         borderColor:'#97CFF2',
