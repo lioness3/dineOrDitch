@@ -39,20 +39,7 @@ export default function Home({navigation}) {
         <Text style={CustomStyles.instructions}>
             Select 'Recipe' for a randomly generated cuisine suggestion.
           </Text>
-        <View style={[{height:100,backgroundColor:'#354047'},CustomStyles.card]}>
-   
-          <TouchableHighlight underlayColor='#AD6BEE'activeOpacity={.8} onPress={() =>
-          navigation.navigate('Dates')
-          }>
-            <Text style={[{color:'#AD6BEE'},styles.button ]}>
-             Date
-            </Text>
-          </TouchableHighlight>
-   
-        </View>
-        <Text style={CustomStyles.instructions}>
-          Select 'Date' for a randomly generated date suggestion.
-          </Text>
+
       </View>
     );
 }
