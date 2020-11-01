@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 import DateIdeas from './DateIdeas';
@@ -9,61 +9,58 @@ import Slogan from './Slogan';
 export default function Dates() {
 const [date, setDate] = useState({title:'', description:''})
 const [instructions, setInstructions] = useState("Sometimes it's difficult to come up with ideas." +`${'\n'}` +"I'm here to help!"+`${'\n'}` +"Press the button below for a randomly generate date idea!")
-const [title, setTitle] = useState('Generate Date Idea')
-const [color, setColor] = useState('blue')
+const [loading, setLoading] = useState(true)
 const [dateIdeaArray, setDateIdeaArray] = useState([DateIdeas])
+const [details, setDetails] = useState(false)
 
 const generateDate = ()=>{
-  console.log( dateIdeaArray);
+
+
   let numberofDates = DateIdeas.length
     let num = Math.floor(Math.random() * numberofDates)
-    let ideas = DateIdeas[num] 
-    let titleIdea = ideas.title
-    let descriptionIdea = ideas.description 
+    let ideas = DateIdeas.splice(num, 1) 
+  
+
+    let titleIdea = ideas[0].title
+    let descriptionIdea = ideas[0].description 
 
     
      setDate({ title: titleIdea, description: descriptionIdea})
+     setLoading(false)
 
+ 
 
     }
-if(date.title){
+
+    
+    if(loading){
+      generateDate()
+    }else if(date.title){
     return(
         <View style={CustomStyles.container}>
           <Slogan categorie='Date Night'/>
-          <View style={[{height:300},CustomStyles.card]}>
+          <View style={[{height:150},CustomStyles.card]}>
             <Text style={styles.title}> {date.title} </Text>
-            <Text style={styles.description}>{date.description}</Text>
+            {details ? <Text style={styles.description}>{date.description}</Text>    : null}
           </View>
-    
+          <Text style={CustomStyles.instructions}> 
+          Press 'Details' to learn about {date.title} {'\n'} or {'\n'}Press 'Ditch' for another date suggestion.
+          </Text>
+          <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setDetails(!details)}}>
+             <CustomButton title='Details' color='#58E80B' icon='check'/>
+   
+           </TouchableHighlight>
             <TouchableHighlight underlayColor='red' activeOpacity={.3} onPress={() =>
           generateDate()
           }>
-                    <View style={{shadowColor:'yellow',
-        shadowRadius:30,
-        shadowOpacity:0.5,}}>
-            <CustomButton title='Ditch' color='red'/>
-            </View>
+ 
+               <CustomButton title='Ditch' color='red' icon='close'/>
+         
           </TouchableHighlight>
         
-            <Text style={CustomStyles.instructions}>Press 'Ditch' for another date suggestion.</Text>
+           
         </View>
         );
-}else{
-    return(
-  
-  
-        <View style={CustomStyles.container}>
-       
-        <TouchableHighlight underlayColor='#AD6BEE'activeOpacity={.3} onPress={() =>
-          generateDate()
-          }>
-            <CustomButton title='Date Idea' color='#AD6BEE' />
-          </TouchableHighlight>
-        <Text style={CustomStyles.instructions}> Select 'Date Idea' for a randomly generated date suggestion!</Text>
-        </View>  
-
-    )
-
 }
 
 }
@@ -72,22 +69,21 @@ const styles = StyleSheet.create({
  
  
     title:{
-     
+        marginVertical: 30,
+        fontSize: 20,
+        
+        textShadowColor:'black',
+        textShadowRadius:5,
         color:'white',
-        textDecorationLine:'underline',
         textAlign:'center',
-      
-        fontSize:30, 
-        fontWeight:'bold' ,
-       
-
-     
+        fontWeight:'bold'
        
     },
     description:{
         paddingHorizontal:10,
         color:'white',
-        fontSize:20, 
+        fontSize:10, 
+        textAlign:'center',
    
 
   

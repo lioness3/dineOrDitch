@@ -14,14 +14,15 @@ export default function Restaurants({navigation}) {
   const [lat, setLat]= useState(null);
   const [lng, setLng]= useState(null);
   const [located, setLocated] = useState(false);
-  const [data, setData] = useState([])
-  const [restaurant, setRestaurant] = useState('');
- const [randomNumber, setRandomNumber] = useState(null)
-  const [randomNumberArray, setRandomNumberArray] = useState([]);
+  const [data, setData] = useState([]);
+  const [restaurant, setRestaurant] = useState([]);
+const [moreOptions, setMoreOptions] = useState(false)
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
   const [typeOfCuisine, setTypeOfCuisine] = useState('');
-
+  const[startFrom, setStartFrom] = useState('0')
+  const [radius, setRadius] = useState('8000')
+  const [display, setDisplay] = useState(false)
 
 
 
@@ -52,7 +53,7 @@ const openSettings = () => {
     }else if(!located){
       console.log('locating');
       const position = await Location.getCurrentPositionAsync()
-    console.log('located');
+   
     
       let lat =  position.coords.latitude
       let lng = position.coords.longitude
@@ -60,55 +61,64 @@ const openSettings = () => {
       setLng(lng),
     
       setLocated(true)
-     
+      console.log('located');
 
     }
 }
 
- const handleRandomNumber = () =>{
- let newNumber = Math.floor(Math.random() * 20)
-
-
-
- 
-  // let compareUniqueNumber = randomNumberArray.includes(randomNumber)
-  let compareUniqueNumber = randomNumberArray.includes(newNumber)
-  if( compareUniqueNumber === false )  {
+ const handleRandomNumber = (data) =>{
+   console.log(startFrom, radius);
    
-    setRandomNumber(newNumber)
+if (data.length > 0){ 
+   let newList = data
+  let numberOfRestaurants = newList.length
+  let num =  Math.floor(Math.random() * numberOfRestaurants)
+  let restaurantInfo = newList.splice(num, 1)
+  let type =  restaurantInfo[0].restaurant.cuisines
+  if (type){
+    if(type.includes('Fast Food')){
+     return(      setLoading(true),
+     handleRandomNumber(data)) 
 
-    console.log('number hasnt been used yet','randomNumber:', randomNumber, 'newNumber:',newNumber);
-    setRandomNumberArray(randomNumberArray => [...randomNumberArray, randomNumber])
 
-   
-  }else if( compareUniqueNumber === true ){
-    console.log('number is a duplicate..loading')
-    handleRandomNumber()
-   
-  
+    }
+   let typeOfCuisine = 'serves' + ' ' + type.toLowerCase()
+   setTypeOfCuisine(typeOfCuisine)
   }
+ 
+ 
+  
+ 
+  let name = restaurantInfo[0].restaurant.name
+
+  let typeOfCuisine = type.toLowerCase()
+  let address = 'located in' + ' ' + restaurantInfo[0].restaurant.location.locality
+  setData(newList),
+  setRestaurant(name),
+
+  setAddress(address),
+  setLoading(false)
+}else{
+  setMoreOptions(true),
+  setLoading(false)
+} 
 
 }
 
 
- async function  generateRestaurant() {
+ async function  generateRestaurants(startFrom, radius) {
+let startNum = startFrom.toString()
+let radiusNum = radius.toString()
+  setStartFrom(startNum)
+  setRadius(radiusNum)
+
+ 
   //MAYBE CHANGE TO IF NOT LOCATED
    if(!lat){
      handleLocationPermission()
    }
-    //  STORE RANDOM NUMBER IN AN ARRAY AND CHECK TO SEE IF YOUVE USED IT BEFORE
-    
-
-   
-//  IF THE RANDOM NUMBER HAS NOT YET BEEN ADDED TO THE Array, ADDIT, ELSE, REGENERATE
-
-
-
- 
-    
-   if (randomNumber >= 0){
-  
-    await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
+if(located){
+  await axios.get(`https://developers.zomato.com/api/v2.1/search?`, {
        headers: {
          'Content-Type': 'application/json',
          'user-key': 'a31bd76da32396a27b6906bf0ca707a2'
@@ -116,53 +126,36 @@ const openSettings = () => {
        params: {
          'lat':`${lat}`,
          'lon': `${lng}`,
-         'radius':'8000',
+         'start':`${startFrom}`,
+         'radius':`${radius}`,
          'sort': 'real_distance'
        }
      }).then(res => {
-       console.log('this siw hat is does witha zero',res.data.restaurants[0].restaurant.name )
-      console.log(randomNumber,'from  api call')
-       let restaurant = res.data.restaurants[randomNumber].restaurant.name
-      
-       let newData = res.data.restaurants
-       let address = res.data.restaurants[randomNumber].restaurant.location.locality
-       let typeOfCuisine = res.data.restaurants[randomNumber].restaurant.cuisines
-     setRestaurant(restaurant),
-      setAddress(address),
-       setData(newData),
-       setTypeOfCuisine(typeOfCuisine),
-       setLoading(false),
-      //  setRandomNumber(null)
+      let data = res.data.restaurants
+     
+ 
+        setData(data),
+      handleRandomNumber(data)
+
+
+     
     
-          
-       console.log(  'random number:', randomNumber, 'random number array:', randomNumberArray, 'restaurant:', restaurant);
-       
 
      }).catch(err => {
        console.log('error',err.message)
      })
-   }else if(!randomNumber){
-     console.log('no random number:',  typeof randomNumber)
-     setLoading(true)
-
-   }
-   
-   
+}
   
-    
-  }
+    }    
+   
 
   
   useEffect( ()=>{
 
-    generateRestaurant()
+    generateRestaurants(startFrom, radius)
   
  }, [located])
- useEffect( ()=>{
 
-  handleRandomNumber()
-
-}, [loading])
 
 const openMap = (restaurant)=>{
   
@@ -177,29 +170,57 @@ if(loading){
       <Text style={styles.loading}>Thinking...</Text>
     </View>
     )
-  }else if(restaurant) {
+  }else if(moreOptions){
+    return (
+      <View style={CustomStyles.container}>
+        <Slogan categorie='Restaurant Choices' />
+        <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
+        <Text>PLEASE EXPAND YOUR SEARCH FOR MORE RESULTS</Text>
+          
+          
+        </View>
+        <Text style={CustomStyles.instructions}>
+          Press 'Expand Search' for more restaurant suggestions {'\n'} or {'\n'}Press 'Recipie Suggestions' to stay home and cook instead.
+         </Text>
+        <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{
+         setLoading(true), setMoreOptions(false), generateRestaurants((parseInt(startFrom) + 20),parseInt(radius)+ 10000)}}>
+          <CustomButton title='Expand Search' color='#58E80B' icon='check'/>
+     
+         </TouchableHighlight>
+  
+        <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {navigation.navigate('Cuisines')}}>
+         <CustomButton title='Recipie Suggestions' color='red' icon='close'/>
+     
+        </TouchableHighlight>
+    
+  
+      </View>
+    )}else {
   return (
     <View style={CustomStyles.container}>
       <Slogan categorie='Restaurant Choices' />
-      <View style={[{backgroundColor:'#354047',},CustomStyles.card]}>
+      <View style={[{backgroundColor:'#354047'},CustomStyles.card]}>
         <Text style={styles.name}>{restaurant} </Text>
-        <Text style={styles.type}>{typeOfCuisine}</Text>
-        <Text style={styles.info}>{address}</Text>
-        
-        
+        <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{setDisplay(!display)}}>
+        <CustomButton size={10} icon='ellipsis-h' color='white' />
+   
+       </TouchableHighlight>
+       {display ?  <View><Text style={styles.type}> {typeOfCuisine}</Text>
+        <Text style={styles.info}>{address}</Text></View> : null}
+       
       </View>
-
+      <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
       <TouchableHighlight underlayColor='#13AF50'activeOpacity={.8} onPress={()=>{openMap(restaurant)}}>
-        <CustomButton title='Dine' color='#58E80B' icon='check'/>
+        <CustomButton title='Dine' color='#58E80B' icon='map-marker'/>
    
        </TouchableHighlight>
 
-      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true),  setRandomNumber(null) ,generateRestaurant()}}>
+      <TouchableHighlight underlayColor='red'activeOpacity={.8} onPress={() => {setLoading(true), handleRandomNumber(data)}}>
       <CustomButton title='Ditch' color='red' icon='close'/>
    
       </TouchableHighlight>
   
-      <Text style={CustomStyles.instructions}>Press 'Dine' for directions {'\n'} or {'\n'}Press 'Ditch' for another selection. </Text>
+     
     </View>
   )
  }
@@ -214,7 +235,7 @@ const styles = StyleSheet.create({
   },
   name:{
     marginVertical: 30,
-    fontSize: 50,
+    fontSize: 40,
     
     textShadowColor:'black',
     textShadowRadius:5,

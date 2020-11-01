@@ -3,12 +3,13 @@ import { StyleSheet, Text, View} from 'react-native';
 import { useLinkProps } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons'; 
 
+
 export default function CustomButton(props) {
 
     return(
-    <Text style={[{backgroundColor:`${props.color}`, borderColor:`${props.color}`}, styles.button]}>
+    <Text style={[{backgroundColor:`${props.color}`, borderColor:`${props.color}`} , styles.button]}>
        {props.title}
-       <FontAwesome name={`${props.icon}`} size={50} color="black" />
+       <FontAwesome name={`${props.icon}`} size={props.size ? props.size : 50} color="black" />
     </Text>
     )
 }
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
   button:{
     padding:10,
     borderRadius:10,
-    fontSize:60,
+    fontSize:40,
     textAlign:'center',
     letterSpacing:2,
    
